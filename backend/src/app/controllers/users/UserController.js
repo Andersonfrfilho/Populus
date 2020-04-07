@@ -40,26 +40,15 @@ class UserController {
   }
 
   async index(req, res) {
-    // verify exist cache in users page
-    const { page = 1, pageSize = 10, filter = '', order = ['id'] } = req.query;
-    // const cacheKey = `users:page:${page}`;
-    // const cached = await Cache.get(cacheKey);
-    // if (cached) {
-    // if (process.env.NODE_ENV !== 'test') {
-    // return res.json(cached);
-    // }
-    // Cache.invalidatePrefix('users:page');
-    // }
-    // const userList = await User.findAll({
-    //   include: [
-    //     {
-    //       model: Contact,
-    //     },
-    //   ],
-    // });
-    // if (process.env.NODE_ENV !== 'test') {
-    // await Cache.set(cacheKey, userList);
-    // }
+    const userList = await User.findAll({
+      include: [
+        {
+          model: Contact,
+          as: 'user_id',
+        },
+      ],
+    });
+
     return res.json(userList);
   }
 

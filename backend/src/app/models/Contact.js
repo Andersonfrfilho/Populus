@@ -24,7 +24,7 @@ class Contact extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.User, { foreignKey: 'fk_user_id' });
+    this.belongsTo(models.User, { foreignKey: 'fk_user_id', as: 'user_id' });
   }
 }
 export default Contact;

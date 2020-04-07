@@ -33,7 +33,7 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Contact);
+    this.hasMany(models.Contact, { foreignKey: 'fk_user_id', as: 'user_id' });
   }
 }
 export default User;

@@ -7,7 +7,7 @@ import Contact from '../app/models/Contact';
 import databaseConfig from '../config/database';
 import File from '../app/models/File';
 
-const models = [User, File, Contact];
+const models = [User, File, Contact, Address, Contact_Address];
 class Database {
   constructor() {
     this.init();

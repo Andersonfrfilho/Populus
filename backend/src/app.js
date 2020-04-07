@@ -5,23 +5,23 @@ import helmet from 'helmet';
 import redis from 'redis';
 import RateLimit from 'express-rate-limit';
 import RateLimitRedis from 'rate-limit-redis';
-import * as Sentry from '@sentry/node';
-import Youch from 'youch';
+// import * as Sentry from '@sentry/node';
+// import Youch from 'youch';
 import io from 'socket.io';
 import http from 'http';
 import 'express-async-errors';
 import routes from './routes';
 import './database';
-import sentryConfig from './config/sentry';
+// import sentryConfig from './config/sentry';
 
 class App {
   constructor() {
     this.app = express();
     this.server = http.Server(this.app);
-    Sentry.init(sentryConfig);
+    // Sentry.init(sentryConfig);
     this.middlewares();
     this.routes();
-    this.exceptionHandler();
+    // this.exceptionHandler();
     // todos usuarios connectados
     this.connectedUsers = {};
   }
@@ -38,7 +38,7 @@ class App {
   }
 
   middlewares() {
-    this.app.use(Sentry.Handlers.requestHandler());
+    // this.app.use(Sentry.Handlers.requestHandler());
     // this.app.use(cors({origin:'link da aplicação}));
     this.app.use(cors({ origin: false }));
     this.app.use((req, res, next) => {
@@ -72,21 +72,21 @@ class App {
 
   routes() {
     this.app.use(routes);
-    this.app.use(Sentry.Handlers.errorHandler());
+    // this.app.use(Sentry.Handlers.errorHandler());
   }
 
-  exceptionHandler() {
-    this.app.use(async (err, req, res, next) => {
-      if (
-        process.env.NODE_ENV !== 'development' &&
-        process.env.NODE_ENV !== 'test'
-      ) {
-        const errors = await new Youch(err, req).toJSON();
-        return res.status(500).json(errors);
-      }
-      return res.status(500).json({ error: 'Internal server error' });
-    });
-  }
+  // exceptionHandler() {
+  //   this.app.use(async (err, req, res, next) => {
+  //     if (
+  //       process.env.NODE_ENV !== 'development' &&
+  //       process.env.NODE_ENV !== 'test'
+  //     ) {
+  //       const errors = await new Youch(err, req).toJSON();
+  //       return res.status(500).json(errors);
+  //     }
+  //     return res.status(500).json({ error: 'Internal server error' });
+  //   });
+  // }
 }
 
 export default new App().server;
