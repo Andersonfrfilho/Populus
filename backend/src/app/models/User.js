@@ -32,8 +32,6 @@ class User extends Model {
     return bcrypt.compare(password, this.password_hash);
   }
 
-  static associate(models) {
-    this.hasMany(models.Contact);
-  }
+  static associate(models) { this.hasMany(models.Contact, { foreignKey: 'fk_user_id', as: 'user_id' }); }
 }
 export default User;

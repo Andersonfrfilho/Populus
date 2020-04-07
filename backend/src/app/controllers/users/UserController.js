@@ -50,13 +50,13 @@ class UserController {
     // }
     // Cache.invalidatePrefix('users:page');
     // }
-    // const userList = await User.findAll({
-    //   include: [
-    //     {
-    //       model: Contact,
-    //     },
-    //   ],
-    // });
+     const userList = await User.findAll({
+       includes: [
+         {
+           model: Contact,
+         },
+       ],
+     });
     // if (process.env.NODE_ENV !== 'test') {
     // await Cache.set(cacheKey, userList);
     // }
