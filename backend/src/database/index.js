@@ -1,10 +1,13 @@
 import Sequelize from 'sequelize';
 import mongoose from 'mongoose';
 import User from '../app/models/User';
+import Address from '../app/models/Address';
+import Contact_Address from '../app/models/Contact_Address';
+import Contact from '../app/models/Contact';
 import databaseConfig from '../config/database';
 import File from '../app/models/File';
 
-const models = [User, File];
+const models = [User, File, Contact];
 class Database {
   constructor() {
     this.init();

@@ -5,6 +5,7 @@ import Notification from '../../schemas/Notification';
 import Contact from '../../models/Contact';
 // import CreateAdminService from '../services/CreateAdminService';
 import Cache from '../../../lib/Cache';
+import File from '../../models/File';
 
 class UserController {
   async store(req, res) {
@@ -41,7 +42,7 @@ class UserController {
 
   async index(req, res) {
     // verify exist cache in users page
-    const { page = 1, pageSize = 10, filter = '', order = ['id'] } = req.query;
+    // const { page = 1, pageSize = 10, filter = '', order = ['id'] } = req.query;
     // const cacheKey = `users:page:${page}`;
     // const cached = await Cache.get(cacheKey);
     // if (cached) {
@@ -50,13 +51,13 @@ class UserController {
     // }
     // Cache.invalidatePrefix('users:page');
     // }
-    // const userList = await User.findAll({
-    //   include: [
-    //     {
-    //       model: Contact,
-    //     },
-    //   ],
-    // });
+    const userList = await Contact.findAll({
+      include: [
+        {
+          model: Contact,
+        },
+      ],
+    });
     // if (process.env.NODE_ENV !== 'test') {
     // await Cache.set(cacheKey, userList);
     // }

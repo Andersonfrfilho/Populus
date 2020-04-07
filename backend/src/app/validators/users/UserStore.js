@@ -14,8 +14,6 @@ export default async (req, res, next) => {
         .required()
         .oneOf([Yup.ref('password')]),
       phone: Yup.string().required(),
-      type: Yup.string().required(),
-      avatar_id: Yup.string(),
     });
     await schema.validate(req.body, { abortEarly: false });
     return next();
