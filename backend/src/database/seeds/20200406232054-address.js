@@ -1,7 +1,7 @@
 module.exports = {
   up: queryInterface => {
     return queryInterface.bulkInsert(
-      'address',
+      'addresses',
       [
         {
           number: 36754,
@@ -11,6 +11,8 @@ module.exports = {
           state: 'arizona',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'holy see (vatican city state)',
         },
         {
@@ -21,6 +23,8 @@ module.exports = {
           state: 'massachusetts',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'nicaragua',
         },
         {
@@ -31,6 +35,8 @@ module.exports = {
           state: 'maryland',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'tuvalu',
         },
         {
@@ -41,6 +47,8 @@ module.exports = {
           state: 'kansas',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'saint martin',
         },
         {
@@ -51,6 +59,8 @@ module.exports = {
           state: 'nebraska',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'japan',
         },
         {
@@ -61,6 +71,8 @@ module.exports = {
           state: 'west virginia',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'united states minor outlying islands',
         },
         {
@@ -71,6 +83,8 @@ module.exports = {
           state: 'kansas',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'bhutan',
         },
         {
@@ -81,6 +95,8 @@ module.exports = {
           state: 'ohio',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'maldives',
         },
         {
@@ -91,6 +107,8 @@ module.exports = {
           state: 'utah',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'pitcairn islands',
         },
         {
@@ -101,6 +119,8 @@ module.exports = {
           state: 'florida',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'guinea-bissau',
         },
         {
@@ -111,6 +131,8 @@ module.exports = {
           state: 'iowa',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'afghanistan',
         },
         {
@@ -121,6 +143,8 @@ module.exports = {
           state: 'georgia',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'tunisia',
         },
         {
@@ -131,6 +155,8 @@ module.exports = {
           state: 'vermont',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'isle of man',
         },
         {
@@ -141,6 +167,8 @@ module.exports = {
           state: 'montana',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'belarus',
         },
         {
@@ -151,6 +179,8 @@ module.exports = {
           state: 'delaware',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'pitcairn islands',
         },
         {
@@ -161,6 +191,8 @@ module.exports = {
           state: 'missouri',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'estonia',
         },
         {
@@ -171,6 +203,8 @@ module.exports = {
           state: 'connecticut',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'yemen',
         },
         {
@@ -181,6 +215,8 @@ module.exports = {
           state: 'oklahoma',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'france',
         },
         {
@@ -191,6 +227,8 @@ module.exports = {
           state: 'hawaii',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'central african republic',
         },
         {
@@ -201,6 +239,8 @@ module.exports = {
           state: 'texas',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'philippines',
         },
         {
@@ -211,6 +251,8 @@ module.exports = {
           state: 'nebraska',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'northern mariana islands',
         },
         {
@@ -221,6 +263,8 @@ module.exports = {
           state: 'connecticut',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'latvia',
         },
         {
@@ -231,6 +275,8 @@ module.exports = {
           state: 'north dakota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'china',
         },
         {
@@ -241,6 +287,8 @@ module.exports = {
           state: 'minnesota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'aruba',
         },
         {
@@ -251,6 +299,8 @@ module.exports = {
           state: 'alaska',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'turkey',
         },
         {
@@ -261,6 +311,8 @@ module.exports = {
           state: 'mississippi',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'italy',
         },
         {
@@ -271,6 +323,8 @@ module.exports = {
           state: 'new york',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'nepal',
         },
         {
@@ -281,6 +335,8 @@ module.exports = {
           state: 'wyoming',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'slovakia (slovak republic)',
         },
         {
@@ -291,6 +347,8 @@ module.exports = {
           state: 'new jersey',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'gambia',
         },
         {
@@ -301,6 +359,8 @@ module.exports = {
           state: 'utah',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'cambodia',
         },
         {
@@ -311,6 +371,8 @@ module.exports = {
           state: 'louisiana',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'antigua and barbuda',
         },
         {
@@ -321,6 +383,8 @@ module.exports = {
           state: 'maryland',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'guinea-bissau',
         },
         {
@@ -331,6 +395,8 @@ module.exports = {
           state: 'florida',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'germany',
         },
         {
@@ -341,6 +407,8 @@ module.exports = {
           state: 'alabama',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'kazakhstan',
         },
         {
@@ -351,6 +419,8 @@ module.exports = {
           state: 'california',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'micronesia',
         },
         {
@@ -361,6 +431,8 @@ module.exports = {
           state: 'massachusetts',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'poland',
         },
         {
@@ -371,6 +443,8 @@ module.exports = {
           state: 'colorado',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'nauru',
         },
         {
@@ -381,6 +455,8 @@ module.exports = {
           state: 'california',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'belgium',
         },
         {
@@ -391,6 +467,8 @@ module.exports = {
           state: 'wyoming',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'rwanda',
         },
         {
@@ -401,6 +479,8 @@ module.exports = {
           state: 'illinois',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'colombia',
         },
         {
@@ -411,6 +491,8 @@ module.exports = {
           state: 'california',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'virgin islands, british',
         },
         {
@@ -421,6 +503,8 @@ module.exports = {
           state: 'alabama',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'burundi',
         },
         {
@@ -431,6 +515,8 @@ module.exports = {
           state: 'nebraska',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'cyprus',
         },
         {
@@ -441,6 +527,8 @@ module.exports = {
           state: 'ohio',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'kuwait',
         },
         {
@@ -451,6 +539,8 @@ module.exports = {
           state: 'minnesota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'peru',
         },
         {
@@ -461,6 +551,8 @@ module.exports = {
           state: 'alabama',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'saint lucia',
         },
         {
@@ -471,6 +563,8 @@ module.exports = {
           state: 'louisiana',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'china',
         },
         {
@@ -481,6 +575,8 @@ module.exports = {
           state: 'georgia',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'sierra leone',
         },
         {
@@ -491,6 +587,8 @@ module.exports = {
           state: 'new jersey',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'slovenia',
         },
         {
@@ -501,6 +599,8 @@ module.exports = {
           state: 'michigan',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'romania',
         },
         {
@@ -511,6 +611,8 @@ module.exports = {
           state: 'california',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'switzerland',
         },
         {
@@ -521,6 +623,8 @@ module.exports = {
           state: 'oregon',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'italy',
         },
         {
@@ -531,6 +635,8 @@ module.exports = {
           state: 'arkansas',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'antigua and barbuda',
         },
         {
@@ -541,6 +647,8 @@ module.exports = {
           state: 'south dakota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'ethiopia',
         },
         {
@@ -551,6 +659,8 @@ module.exports = {
           state: 'delaware',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'libyan arab jamahiriya',
         },
         {
@@ -561,6 +671,8 @@ module.exports = {
           state: 'south dakota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'lesotho',
         },
         {
@@ -571,6 +683,8 @@ module.exports = {
           state: 'maine',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'bulgaria',
         },
         {
@@ -581,6 +695,8 @@ module.exports = {
           state: 'pennsylvania',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'senegal',
         },
         {
@@ -591,6 +707,8 @@ module.exports = {
           state: 'michigan',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'argentina',
         },
         {
@@ -601,6 +719,8 @@ module.exports = {
           state: 'south carolina',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'nepal',
         },
         {
@@ -611,6 +731,8 @@ module.exports = {
           state: 'utah',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'singapore',
         },
         {
@@ -621,6 +743,8 @@ module.exports = {
           state: 'oklahoma',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'vietnam',
         },
         {
@@ -631,6 +755,8 @@ module.exports = {
           state: 'washington',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'brunei darussalam',
         },
         {
@@ -641,6 +767,8 @@ module.exports = {
           state: 'north dakota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: "cote d'ivoire",
         },
         {
@@ -651,6 +779,8 @@ module.exports = {
           state: 'michigan',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'malawi',
         },
         {
@@ -661,6 +791,8 @@ module.exports = {
           state: 'ohio',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'croatia',
         },
         {
@@ -671,6 +803,8 @@ module.exports = {
           state: 'ohio',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'norfolk island',
         },
         {
@@ -681,6 +815,8 @@ module.exports = {
           state: 'alabama',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'morocco',
         },
         {
@@ -691,6 +827,8 @@ module.exports = {
           state: 'north carolina',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'tonga',
         },
         {
@@ -701,6 +839,8 @@ module.exports = {
           state: 'washington',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'sao tome and principe',
         },
         {
@@ -711,6 +851,8 @@ module.exports = {
           state: 'virginia',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'ghana',
         },
         {
@@ -721,6 +863,8 @@ module.exports = {
           state: 'south dakota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'singapore',
         },
         {
@@ -731,6 +875,8 @@ module.exports = {
           state: 'new hampshire',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'netherlands',
         },
         {
@@ -741,6 +887,8 @@ module.exports = {
           state: 'oklahoma',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'grenada',
         },
         {
@@ -751,6 +899,8 @@ module.exports = {
           state: 'south carolina',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'namibia',
         },
         {
@@ -761,6 +911,8 @@ module.exports = {
           state: 'new york',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'anguilla',
         },
         {
@@ -771,6 +923,8 @@ module.exports = {
           state: 'north dakota',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'iceland',
         },
         {
@@ -781,6 +935,8 @@ module.exports = {
           state: 'rhode island',
           created_at: new Date(),
           updated_at: new Date(),
+          zipcode: '123456',
+          fk_contact_id: Math.floor(Math.random() * 75) + 1,
           country: 'cambodia',
         },
       ],
@@ -789,6 +945,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.bulkDelete('address', null, {});
+    return queryInterface.bulkDelete('addresses', null, {});
   },
 };

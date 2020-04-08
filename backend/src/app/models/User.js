@@ -28,12 +28,12 @@ class User extends Model {
     return this;
   }
 
-  checkPassword(password) {
-    return bcrypt.compare(password, this.password_hash);
+  static associate(models) {
+    this.hasMany(models.Contact, { foreignKey: 'fk_user_id', as: 'contacts' });
   }
 
-  static associate(models) {
-    this.hasMany(models.Contact, { foreignKey: 'fk_user_id', as: 'user_id' });
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
   }
 }
 export default User;

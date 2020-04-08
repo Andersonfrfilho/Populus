@@ -24,6 +24,10 @@ class Contact extends Model {
   }
 
   static associate(models) {
+    this.hasMany(models.Address, {
+      foreignKey: 'fk_contact_id',
+      as: 'address',
+    });
     this.belongsTo(models.User, { foreignKey: 'fk_user_id', as: 'user_id' });
   }
 }

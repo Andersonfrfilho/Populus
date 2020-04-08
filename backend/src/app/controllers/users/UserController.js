@@ -3,6 +3,7 @@ import Queue from '../../../lib/Queue';
 import ConfirmationMail from '../../jobs/ConfirmationMail';
 import Notification from '../../schemas/Notification';
 import Contact from '../../models/Contact';
+import Address from '../../models/Address';
 // import CreateAdminService from '../services/CreateAdminService';
 import Cache from '../../../lib/Cache';
 
@@ -23,15 +24,15 @@ class UserController {
 
     const { id, name, email, phone } = await User.create(req.body);
     // notification
-    const notification = await Notification.create({
+    await Notification.create({
       content: `${name}, seu cadastro foi realizado com sucesso`,
       user: id,
     });
     // notification com socket.io
-    const ownerSocket = req.connectedUsers[id];
-    if (ownerSocket) {
-      req.io.to(ownerSocket).emit('notification', notification);
-    }
+    // const ownerSocket = req.connectedUsers[id];
+    // if (ownerSocket) {
+    //   req.io.to(ownerSocket).emit('notification', notification);
+    // }
     // invalidando cache pois houve modificações
     // await Cache.invalidatePrefix('users:page');
     // await Cache.invalidatePrefix('user:admins:page:');
@@ -41,10 +42,27 @@ class UserController {
 
   async index(req, res) {
     const userList = await User.findAll({
+      attributes: ['id', 'name', 'phone', 'email'],
       include: [
         {
           model: Contact,
-          as: 'user_id',
+          as: 'contacts',
+          attributes: ['id', 'name', 'lastname', 'phone', 'email'],
+          include: [
+            {
+              model: Address,
+              as: 'address',
+              attributes: [
+                'number',
+                'address',
+                'neighborhood',
+                'city',
+                'state',
+                'country',
+                'zipcode',
+              ],
+            },
+          ],
         },
       ],
     });
@@ -53,64 +71,65 @@ class UserController {
   }
 
   async show(req, res) {
-    // verify exist cache in users
-
-    // const cached = await Cache.get('user');
-    // if (cached) {
-    //   if (process.env.NODE_ENV !== 'test') {
-    //     return res.json(cached);
-    //   }
-    // }
-    const { id } = req.params;
-
-    const userEspecified = await User.findByPk(id, {
-      attributes: ['id', 'name', 'email', 'phone', 'avatar_id', 'type'],
+    const userEspecified = await User.findByPk(req.userId, {
+      attributes: ['id', 'name', 'phone', 'email'],
       include: [
         {
-          model: File,
-          as: 'avatar',
-          attributes: ['url'],
+          model: Contact,
+          as: 'contacts',
+          attributes: ['id', 'name', 'lastname', 'phone', 'email'],
+          include: [
+            {
+              model: Address,
+              as: 'address',
+              attributes: [
+                'number',
+                'address',
+                'neighborhood',
+                'city',
+                'state',
+                'country',
+                'zipcode',
+              ],
+            },
+          ],
         },
       ],
     });
     if (!userEspecified) {
       res.status(400).json({ message: 'usuario não encontrado' });
     }
-    // service cache (first:name:string, objeto)
-    // if (process.env.NODE_ENV !== 'test') {
-    //   await Cache.set('user', userEspecified);
-    // }
     return res.json(userEspecified);
   }
 
   async update(req, res) {
-    const { id } = req.params;
-    const { name, phone, email, type, oldPassword } = req.body;
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(req.userId);
     const emailExist = await User.findOne({
-      where: { email: email.toLowerCase() },
+      where: { email: req.body.email.toLowerCase() },
     });
     if (emailExist) {
       return res.status(400).json({ error: 'Email exist try other' });
     }
-    const phoneExist = await User.findOne({ where: { phone } });
+    const phoneExist = await User.findOne({ where: { phone: req.body.phone } });
     if (phoneExist) {
       return res.status(400).json({ error: 'Telephone exist try other' });
     }
-    if (!(await user.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'password incorrect' });
+    if (req.body.oldPassword) {
+      if (!(await user.checkPassword(req.body.oldPassword))) {
+        return res.status(401).json({ error: 'password incorrect' });
+      }
     }
     const userModified = await user.update(req.body);
-    // await Cache.invalidate('user');
+    return res.json(userModified);
+  }
 
-    return res.json({
-      id: userModified.id,
-      email: userModified.email,
-      name: userModified.name,
-      phone: userModified.phone,
-      type: userModified.type,
-      avatar_id: userModified.avatar_id,
-    });
+  async destroy(req, res) {
+    const user = await User.findByPk(req.userId);
+    if (!user) {
+      return res.status(401).json({ error: 'user not exist' });
+    }
+    await user.destroy();
+    return res.json({ message: 'usuario deletado' });
   }
 }
 export default new UserController();

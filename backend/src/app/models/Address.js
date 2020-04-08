@@ -10,6 +10,8 @@ class Address extends Model {
         city: Sequelize.STRING,
         state: Sequelize.STRING,
         country: Sequelize.STRING,
+        zipcode: Sequelize.STRING,
+        fk_contact_id: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -24,6 +26,13 @@ class Address extends Model {
       address.country = address.country.toLowerCase();
     });
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Contact, {
+      foreignKey: 'fk_contact_id',
+      as: 'contact_id',
+    });
   }
 }
 export default Address;
