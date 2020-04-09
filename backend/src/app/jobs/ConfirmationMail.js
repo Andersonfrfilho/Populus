@@ -6,15 +6,15 @@ class ConfirmationMail {
   }
 
   async handle({ data }) {
-    const { name } = data;
+    const { name, email } = data;
 
     await Mail.sendMail({
-      to: `${name} <andersonfrfilho@gmail.com>`,
-      subject: 'Empresa criada',
+      to: `${name} <${email}>`,
+      subject: 'Cadastro de Usuário',
       template: 'confirmation',
       context: {
-        user: 'Anderson',
-        company: 'incca sistemas',
+        user: `${name}`,
+        company: 'populus',
       },
     });
   }

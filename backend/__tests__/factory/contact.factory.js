@@ -3,10 +3,10 @@ import { factory } from 'factory-girl';
 
 import User from '../../src/app/models/User';
 
-factory.define('User', User, {
+factory.define('Contact', User, {
   name: faker.name.firstName,
-  email: faker.internet.email,
-  password: faker.internet.password,
+  lastname: faker.name.lastName,
   phone: faker.phone.phoneNumber,
+  email: faker.internet.email,
 });
 export default factory;

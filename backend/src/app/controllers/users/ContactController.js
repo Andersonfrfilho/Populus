@@ -17,10 +17,8 @@ class ContactController {
     }
     const { id: idContact } = await Contact.create(newContact);
     return res.json({
-      contact: {
-        id: idContact,
-        ...newContact,
-      },
+      id: idContact,
+      ...newContact,
     });
   }
 
@@ -37,6 +35,7 @@ class ContactController {
           model: Address,
           as: 'address',
           attributes: [
+            'id',
             'number',
             'address',
             'neighborhood',

@@ -1,5 +1,5 @@
-import Contact from '../../models/Contact';
-import Address from '../../models/Address';
+import Contact from '../models/Contact';
+import Address from '../models/Address';
 
 class AddressController {
   async store(req, res) {
@@ -23,12 +23,14 @@ class AddressController {
       zipcode,
       fk_contact_id: contact_id,
     };
+    const contactExist = await Contact.findByPk(contact_id);
+    if (!contactExist) {
+      return res.status(400).json({ error: 'Contact not find' });
+    }
     const { id: idAddress } = await Address.create(newAddress);
     return res.json({
-      contact: {
-        id: idAddress,
-        ...newAddress,
-      },
+      id: idAddress,
+      ...newAddress,
     });
   }
 

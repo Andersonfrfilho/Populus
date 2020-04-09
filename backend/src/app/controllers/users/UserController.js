@@ -21,54 +21,45 @@ class UserController {
     if (userPhoneExists) {
       return res.status(400).json({ error: 'User already exist phone' });
     }
-
     const { id, name, email, phone } = await User.create(req.body);
     // notification
     await Notification.create({
       content: `${name}, seu cadastro foi realizado com sucesso`,
       user: id,
     });
-    // notification com socket.io
-    // const ownerSocket = req.connectedUsers[id];
-    // if (ownerSocket) {
-    //   req.io.to(ownerSocket).emit('notification', notification);
-    // }
-    // invalidando cache pois houve modificações
-    // await Cache.invalidatePrefix('users:page');
-    // await Cache.invalidatePrefix('user:admins:page:');
-    await Queue.add(ConfirmationMail.key, { name });
+    // await Queue.add(ConfirmationMail.key, { name, email });
     return res.json({ id, name, email, phone });
   }
 
-  async index(req, res) {
-    const userList = await User.findAll({
-      attributes: ['id', 'name', 'phone', 'email'],
-      include: [
-        {
-          model: Contact,
-          as: 'contacts',
-          attributes: ['id', 'name', 'lastname', 'phone', 'email'],
-          include: [
-            {
-              model: Address,
-              as: 'address',
-              attributes: [
-                'number',
-                'address',
-                'neighborhood',
-                'city',
-                'state',
-                'country',
-                'zipcode',
-              ],
-            },
-          ],
-        },
-      ],
-    });
+  // async index(req, res) {
+  //   const userList = await User.findAll({
+  //     attributes: ['id', 'name', 'phone', 'email'],
+  //     include: [
+  //       {
+  //         model: Contact,
+  //         as: 'contacts',
+  //         attributes: ['id', 'name', 'lastname', 'phone', 'email'],
+  //         include: [
+  //           {
+  //             model: Address,
+  //             as: 'address',
+  //             attributes: [
+  //               'number',
+  //               'address',
+  //               'neighborhood',
+  //               'city',
+  //               'state',
+  //               'country',
+  //               'zipcode',
+  //             ],
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   });
 
-    return res.json(userList);
-  }
+  //   return res.json(userList);
+  // }
 
   async show(req, res) {
     const userEspecified = await User.findByPk(req.userId, {

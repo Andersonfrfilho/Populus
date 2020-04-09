@@ -1,4 +1,5 @@
 import userFactory from './user.factory';
-import fileFactory from './file.factory';
+import addressFactory from './address.factory';
+import contactFactory from './contact.factory';
 
-export { userFactory, fileFactory };
+export { userFactory, contactFactory, addressFactory };
