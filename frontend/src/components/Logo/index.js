@@ -32,7 +32,7 @@ export default function Logo({ error, image, title, message }) {
 }
 Logo.propTypes = {
   error: PropTypes.bool,
-  title: PropTypes.bool,
+  title: PropTypes.string,
   image: PropTypes.bool,
   message: PropTypes.string,
 };

@@ -24,10 +24,6 @@ export default function ForgotPassword() {
   const [showFieldStateTwo, setShowFieldStateTwo] = useState(false);
   const [transitionVisible, setTransitionVisible] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(null);
-  useEffect(() => {
-    setTransitionVisible(true);
-    dispatch(UsersActions.requestUserExist());
-  }, []); //eslint-disable-line
 
   const query = useQuery();
   function requestRedefinedPassword(passwordParam, confirmPasswordParam) {

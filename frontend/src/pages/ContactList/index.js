@@ -70,7 +70,7 @@ function ContactList() {
   }
   const [valueSearch, setValueSearch] = useState('');
 
-  if (loading || contacts.length === 0) {
+  if (loading || contacts === undefined) {
     return <Loader />;
   }
   function verifyNameFunction(nameParam) {

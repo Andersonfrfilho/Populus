@@ -49,13 +49,6 @@ function* requestContacts() {
             length: 3,
             align: 'flex-start',
           },
-          {
-            name: 'E-mail',
-            type: 'alpha',
-            select: false,
-            length: 3,
-            align: 'flex-start',
-          },
         ],
       },
     ];

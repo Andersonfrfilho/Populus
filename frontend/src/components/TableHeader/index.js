@@ -96,7 +96,7 @@ export default function TableHeader({
   functionOnEndingChangeAddressesZipCodeModal,
   // Modal :fields : register :number
   titleInputAddressesNumberModal,
-  typeInputMaskAddressesNumberModal,
+  typeInputAddressesNumberModal,
   typeInputAddressesNumberFormatModal,
   placeholderAddressesNumberModal,
   disabledInputAddressesesNumberModal,
@@ -105,7 +105,7 @@ export default function TableHeader({
   functionOnEndingChangeAddressesNumberModal,
   // Modal :fields : register :name
   titleInputAddressesNameModal,
-  typeInputMaskAddressesNameModal,
+  typeInputAddressesNameModal,
   typeInputAddressesNameFormatModal,
   placeholderAddressesNameModal,
   disabledInputAddressesesNameModal,
@@ -114,7 +114,7 @@ export default function TableHeader({
   functionOnEndingChangeAddressesNameModal,
   // Modal :fields : register :beihoord
   titleInputAddressesNeighborhoodModal,
-  typeInputMaskAddressesNeighborhoodModal,
+  typeInputAddressesNeighborhoodModal,
   typeInputAddressesNeighborhoodFormatModal,
   placeholderAddressesNeighborhoodModal,
   disabledInputAddressesesNeighborhoodModal,
@@ -123,7 +123,7 @@ export default function TableHeader({
   functionOnEndingChangeAddressesNeighborhoodModal,
   // Modal :fields : register :city
   titleInputAddressesCityModal,
-  typeInputMaskAddressesCityModal,
+  typeInputAddressesCityModal,
   typeInputAddressesCityFormatModal,
   placeholderAddressesCityModal,
   disabledInputAddressesesCityModal,
@@ -258,7 +258,7 @@ export default function TableHeader({
           }
           // fields : addresses : number
           titleInputAddressesNumber={titleInputAddressesNumberModal}
-          typeInputAddressesNumber={typeInputMaskAddressesNumberModal}
+          typeInputAddressesNumber={typeInputAddressesNumberModal}
           typeInputAddressesNumberFormat={typeInputAddressesNumberFormatModal}
           placeholderInputAddressesNumber={placeholderAddressesNumberModal}
           disabledInputAddressesNumber={disabledInputAddressesesNumberModal}
@@ -271,7 +271,7 @@ export default function TableHeader({
           }
           // fields : addresses : name
           titleInputAddressesName={titleInputAddressesNameModal}
-          typeInputAddressesName={typeInputMaskAddressesNameModal}
+          typeInputAddressesName={typeInputAddressesNameModal}
           typeInputAddressesNameFormat={typeInputAddressesNameFormatModal}
           placeholderInputAddressesName={placeholderAddressesNameModal}
           disabledInputAddressesName={disabledInputAddressesesNameModal}
@@ -284,9 +284,7 @@ export default function TableHeader({
           }
           // fields : addresses : neighborhood
           titleInputAddressesNeighborhood={titleInputAddressesNeighborhoodModal}
-          typeInputAddressesNeighborhood={
-            typeInputMaskAddressesNeighborhoodModal
-          }
+          typeInputAddressesNeighborhood={typeInputAddressesNeighborhoodModal}
           typeInputAddressesNeighborhoodFormat={
             typeInputAddressesNeighborhoodFormatModal
           }
@@ -305,7 +303,7 @@ export default function TableHeader({
           }
           // fields : addresses : city
           titleInputAddressesCity={titleInputAddressesCityModal}
-          typeInputAddressesCity={typeInputMaskAddressesCityModal}
+          typeInputAddressesCity={typeInputAddressesCityModal}
           typeInputAddressesCityFormat={typeInputAddressesCityFormatModal}
           placeholderInputAddressesCity={placeholderAddressesCityModal}
           disabledInputAddressesCity={disabledInputAddressesesCityModal}
@@ -463,7 +461,7 @@ TableHeader.propTypes = {
   functionOnEndingChangeAddressesZipCodeModal: PropTypes.func,
   // Modal : addresses : fields : Number
   titleInputAddressesNumberModal: PropTypes.string,
-  typeInputMaskAddressesNumberModal: PropTypes.string,
+  typeInputAddressesNumberModal: PropTypes.string,
   typeInputAddressesNumberFormatModal: PropTypes.string,
   placeholderAddressesNumberModal: PropTypes.string,
   disabledInputAddressesesNumberModal: PropTypes.bool,
@@ -472,7 +470,7 @@ TableHeader.propTypes = {
   functionOnEndingChangeAddressesNumberModal: PropTypes.func,
   // Modal : addresses : fields : Name
   titleInputAddressesNameModal: PropTypes.string,
-  typeInputMaskAddressesNameModal: PropTypes.string,
+  typeInputAddressesNameModal: PropTypes.string,
   typeInputAddressesNameFormatModal: PropTypes.string,
   placeholderAddressesNameModal: PropTypes.string,
   disabledInputAddressesesNameModal: PropTypes.bool,
@@ -481,7 +479,7 @@ TableHeader.propTypes = {
   functionOnEndingChangeAddressesNameModal: PropTypes.func,
   // Modal : addresses : fields : Neightbor
   titleInputAddressesNeighborhoodModal: PropTypes.string,
-  typeInputMaskAddressesNeighborhoodModal: PropTypes.string,
+  typeInputAddressesNeighborhoodModal: PropTypes.string,
   typeInputAddressesNeighborhoodFormatModal: PropTypes.string,
   placeholderAddressesNeighborhoodModal: PropTypes.string,
   disabledInputAddressesesNeighborhoodModal: PropTypes.bool,
@@ -490,7 +488,7 @@ TableHeader.propTypes = {
   functionOnEndingChangeAddressesNeighborhoodModal: PropTypes.func,
   // Modal : addresses : fields : city
   titleInputAddressesCityModal: PropTypes.string,
-  typeInputMaskAddressesCityModal: PropTypes.string,
+  typeInputAddressesCityModal: PropTypes.string,
   typeInputAddressesCityFormatModal: PropTypes.string,
   placeholderAddressesCityModal: PropTypes.string,
   disabledInputAddressesesCityModal: PropTypes.bool,
@@ -611,7 +609,7 @@ TableHeader.defaultProps = {
   functionOnEndingChangeAddressesZipCodeModal: () => {},
   // Modal : address : fields : number
   titleInputAddressesNumberModal: 'title input number',
-  typeInputMaskAddressesNumberModal: 'text',
+  typeInputAddressesNumberModal: 'text',
   typeInputAddressesNumberFormatModal: 'text',
   placeholderAddressesNumberModal: 'placeolder input number',
   disabledInputAddressesesNumberModal: true,
@@ -620,7 +618,7 @@ TableHeader.defaultProps = {
   functionOnEndingChangeAddressesNumberModal: () => {},
   // Modal : address : fields : number
   titleInputAddressesNameModal: 'title input Name',
-  typeInputMaskAddressesNameModal: 'text',
+  typeInputAddressesNameModal: 'text',
   typeInputAddressesNameFormatModal: 'text',
   placeholderAddressesNameModal: 'placeolder input Name',
   disabledInputAddressesesNameModal: true,
@@ -629,7 +627,7 @@ TableHeader.defaultProps = {
   functionOnEndingChangeAddressesNameModal: () => {},
   // Modal : address : fields : number
   titleInputAddressesNeighborhoodModal: 'title input Neighborhood',
-  typeInputMaskAddressesNeighborhoodModal: 'text',
+  typeInputAddressesNeighborhoodModal: 'text',
   typeInputAddressesNeighborhoodFormatModal: 'text',
   placeholderAddressesNeighborhoodModal: 'placeolder input Neighborhood',
   disabledInputAddressesesNeighborhoodModal: true,
@@ -638,7 +636,7 @@ TableHeader.defaultProps = {
   functionOnEndingChangeAddressesNeighborhoodModal: () => {},
   // Modal : address : fields : number
   titleInputAddressesCityModal: 'title input City',
-  typeInputMaskAddressesCityModal: 'text',
+  typeInputAddressesCityModal: 'text',
   typeInputAddressesCityFormatModal: 'text',
   placeholderAddressesCityModal: 'placeolder input City',
   disabledInputAddressesesCityModal: true,

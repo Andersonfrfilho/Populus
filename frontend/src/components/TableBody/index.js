@@ -17,6 +17,7 @@ import {
   IconFilterAlphaDown,
   IconFilterAlphaUp,
 } from './styles';
+import Loader from '../Loader';
 
 function functionSelectFilterNumber(selectParam) {
   return selectParam ? <IconFilterNumericDown /> : <IconFilterNumericUp />;
@@ -49,8 +50,9 @@ export default function TableBody({ infoTable }) {
         ))}
       </Row>
       {infoTable.map((element, index) => {
-        const { name, email, lastname } = element;
         if (index !== 0) {
+          const { name, lastname } = element;
+          console.tron.log(element);
           return (
             <Row key={index.toString()}>
               <Column flex={2}>
@@ -73,11 +75,6 @@ export default function TableBody({ infoTable }) {
                     lastname.slice(1)}`}</Info>
                 </AreaTable>
               </Column>
-              <Column flex={3}>
-                <AreaTable>
-                  <Info>{email}</Info>
-                </AreaTable>
-              </Column>
             </Row>
           );
         }
@@ -95,13 +92,6 @@ TableBody.defaultProps = {
       options: [
         {
           name: 'Nome',
-          type: 'alpha',
-          select: false,
-          length: 3,
-          align: 'flex-start',
-        },
-        {
-          name: 'E-mail',
           type: 'alpha',
           select: false,
           length: 3,

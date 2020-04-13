@@ -34,8 +34,27 @@ function* requestLogin({ payload: { email, password } }) {
     const {
       data: { contacts },
     } = yield call(api.get, `/user`, headers);
-    localStorage.setItem('populus@contacts', JSON.stringify(contacts));
-    yield put(defineInformationUser(user.name, contacts));
+    const newDataContacts = [
+      {
+        options: [
+          {
+            name: 'Nome',
+            type: 'alpha',
+            select: false,
+            length: 3,
+            align: 'flex-start',
+          },
+        ],
+      },
+    ];
+    const dataNames = contacts.map(
+      contact => `${contact.name} ${contact.lastname}`
+    );
+    contacts.forEach(contact => {
+      newDataContacts.push(contact);
+    });
+
+    yield put(defineInformationUser(user.name, newDataContacts, dataNames));
     toast.success('login efetuado com sucesso');
     history.push('/drawer');
     yield put(successAction(''));
@@ -60,7 +79,7 @@ function* requestLoginExist() {
   const {
     data: { contacts },
   } = yield call(api.get, `/user`, headers);
-  let user = localStorage.setItem('populus@user');
+  let user = localStorage.getItem('populus@user');
   user = JSON.parse(user);
   const dataNames = [];
   const dataInfo = [
@@ -68,13 +87,6 @@ function* requestLoginExist() {
       options: [
         {
           name: 'Nome',
-          type: 'alpha',
-          select: false,
-          length: 3,
-          align: 'flex-start',
-        },
-        {
-          name: 'E-mail',
           type: 'alpha',
           select: false,
           length: 3,

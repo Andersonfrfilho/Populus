@@ -2,7 +2,19 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   name: '',
-  contacts: [],
+  contacts: [
+    {
+      options: [
+        {
+          name: 'Nome',
+          type: 'alpha',
+          select: false,
+          length: 3,
+          align: 'flex-start',
+        },
+      ],
+    },
+  ],
   names: [],
 };
 

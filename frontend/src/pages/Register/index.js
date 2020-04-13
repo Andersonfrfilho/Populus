@@ -34,10 +34,6 @@ export default function Register() {
   const [errorMail, setErrorMail] = useState(null);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(null);
   const [maskState, setMaskState] = useState('+55 (99) 9 9999-9999');
-  useEffect(() => {
-    setTransitionVisible(true);
-    dispatch(UsersActions.requestUserExist());
-  }, []); //eslint-disable-line
 
   function functionBackPage() {
     setTransitionVisible(!transitionVisible);

@@ -338,7 +338,6 @@ export default function ModalRegister({
                     placeholder={placeholderInputAddressesName}
                     disabled={disabledInputAddressesName}
                     icon={iconInputAddressesName}
-                    inputMask={inputMaskAddressesName}
                     functionOnChange={text =>
                       functionOnChangeInputAddressesName(text, index)
                     }
@@ -357,7 +356,6 @@ export default function ModalRegister({
                     placeholder={placeholderInputAddressesNumber}
                     disabled={disabledInputAddressesNumber}
                     icon={iconInputAddressesNumber}
-                    inputMask={inputMaskAddressesNumber}
                     functionOnChange={text =>
                       functionOnChangeInputAddressesNumber(text, index)
                     }
@@ -381,7 +379,6 @@ export default function ModalRegister({
                     placeholder={placeholderInputAddressesNeighborhood}
                     disabled={disabledInputAddressesNeighborhood}
                     icon={iconInputAddressesNeighborhood}
-                    inputMask={inputMaskAddressesNeighborhood}
                     functionOnChange={text =>
                       functionOnChangeInputAddressesNeighborhood(text, index)
                     }
@@ -402,7 +399,6 @@ export default function ModalRegister({
                     placeholder={placeholderInputAddressesCity}
                     disabled={disabledInputAddressesCity}
                     icon={iconInputAddressesCity}
-                    inputMask={inputMaskAddressesCity}
                     functionOnChange={text =>
                       functionOnChangeInputAddressesCity(text, index)
                     }

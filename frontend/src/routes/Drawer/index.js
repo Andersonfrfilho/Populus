@@ -95,12 +95,12 @@ export default function Panel(props) {
   function functionClickLink(nameParam) {
     setNamePage(nameParam);
   }
-  useEffect(() => {
-    let user = localStorage.getItem('populus@user');
-    user = JSON.parse(user);
+  // useEffect(() => {
+  //   let user = localStorage.getItem('populus@user');
+  //   user = JSON.parse(user);
 
-    dispatch(ContactsActions.defineInformationUser(user.name));
-  }, []); //eslint-disable-line
+  //   dispatch(ContactsActions.defineInformationUser(user.name));
+  // }, []); //eslint-disable-line
   useEffect(() => {
     const newOptions = drawer.options.filter(element =>
       element.name.toLowerCase().includes(searchText.toLowerCase())
