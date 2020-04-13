@@ -3,9 +3,10 @@ import mongoose from 'mongoose';
 import User from '../app/models/User';
 import Contact from '../app/models/Contact';
 import Address from '../app/models/Address';
+import Phone from '../app/models/Phone';
 import databaseConfig from '../config/database';
 
-const models = [User, Contact, Address];
+const models = [User, Contact, Phone, Address];
 class Database {
   constructor() {
     this.init();

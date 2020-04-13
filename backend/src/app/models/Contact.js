@@ -6,7 +6,6 @@ class Contact extends Model {
       {
         name: Sequelize.STRING,
         lastname: Sequelize.STRING,
-        phone: Sequelize.STRING,
         email: Sequelize.STRING,
         fk_user_id: Sequelize.INTEGER,
       },
@@ -26,7 +25,11 @@ class Contact extends Model {
   static associate(models) {
     this.hasMany(models.Address, {
       foreignKey: 'fk_contact_id',
-      as: 'address',
+      as: 'addresses',
+    });
+    this.hasMany(models.Phone, {
+      foreignKey: 'fk_contact_id',
+      as: 'phones',
     });
     this.belongsTo(models.User, { foreignKey: 'fk_user_id', as: 'user_id' });
   }

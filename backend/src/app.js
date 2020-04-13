@@ -40,7 +40,7 @@ class App {
   middlewares() {
     // this.app.use(Sentry.Handlers.requestHandler());
     // this.app.use(cors({origin:'link da aplicação}));
-    this.app.use(cors({ origin: false }));
+    this.app.use(cors({ origin: 'http://localhost:3000' }));
     this.app.use((req, res, next) => {
       req.io = this.io;
       req.connectedUsers = this.connectedUsers;

@@ -185,7 +185,7 @@ describe('User', () => {
       contact_id: responseContact.id,
     };
     const { body: responseAddress } = await request(app)
-      .post('/users/content/contacts/content/address')
+      .post('/users/content/contacts/content/addresses')
       .send(newAddress)
       .set('Authorization', `bearer ${tokenUser}`);
     expect(responseAddress).toEqual(
@@ -216,7 +216,7 @@ describe('User', () => {
             lastname: expect.any(String),
             phone: expect.any(String),
             email: expect.any(String),
-            address: expect.objectContaining([
+            addresses: expect.objectContaining([
               expect.objectContaining({
                 address: expect.any(String),
                 number: expect.any(String),

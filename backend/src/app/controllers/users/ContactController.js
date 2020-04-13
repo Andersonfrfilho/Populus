@@ -1,5 +1,6 @@
 import Contact from '../../models/Contact';
 import Address from '../../models/Address';
+import Phone from '../../models/Phone';
 
 class ContactController {
   async store(req, res) {
@@ -27,13 +28,13 @@ class ContactController {
     const listContacts = await Contact.findOne(idContact, {
       limit: pageSize,
       offset: (page - 1) * pageSize,
-      attributes: ['id', 'name', 'lastname', 'phone', 'email'],
+      attributes: ['id', 'name', 'lastname', 'email'],
       order,
       where: { fk_user_id: req.userId },
       include: [
         {
           model: Address,
-          as: 'address',
+          as: 'addresses',
           attributes: [
             'id',
             'number',
@@ -44,6 +45,11 @@ class ContactController {
             'country',
             'zipcode',
           ],
+        },
+        {
+          model: Phone,
+          as: 'phones',
+          attributes: ['id', 'number'],
         },
       ],
     });

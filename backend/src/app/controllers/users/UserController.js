@@ -4,6 +4,7 @@ import ConfirmationMail from '../../jobs/ConfirmationMail';
 import Notification from '../../schemas/Notification';
 import Contact from '../../models/Contact';
 import Address from '../../models/Address';
+import Phone from '../../models/Phone';
 // import CreateAdminService from '../services/CreateAdminService';
 import Cache from '../../../lib/Cache';
 
@@ -31,49 +32,20 @@ class UserController {
     return res.json({ id, name, email, phone });
   }
 
-  // async index(req, res) {
-  //   const userList = await User.findAll({
-  //     attributes: ['id', 'name', 'phone', 'email'],
-  //     include: [
-  //       {
-  //         model: Contact,
-  //         as: 'contacts',
-  //         attributes: ['id', 'name', 'lastname', 'phone', 'email'],
-  //         include: [
-  //           {
-  //             model: Address,
-  //             as: 'address',
-  //             attributes: [
-  //               'number',
-  //               'address',
-  //               'neighborhood',
-  //               'city',
-  //               'state',
-  //               'country',
-  //               'zipcode',
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   });
-
-  //   return res.json(userList);
-  // }
-
-  async show(req, res) {
-    const userEspecified = await User.findByPk(req.userId, {
+  async index(req, res) {
+    const userList = await User.findAll({
       attributes: ['id', 'name', 'phone', 'email'],
       include: [
         {
           model: Contact,
           as: 'contacts',
-          attributes: ['id', 'name', 'lastname', 'phone', 'email'],
+          attributes: ['id', 'name', 'lastname', 'email'],
           include: [
             {
               model: Address,
-              as: 'address',
+              as: 'addresses',
               attributes: [
+                'id',
                 'number',
                 'address',
                 'neighborhood',
@@ -82,6 +54,47 @@ class UserController {
                 'country',
                 'zipcode',
               ],
+            },
+            {
+              model: Phone,
+              as: 'phones',
+              attributes: ['id', 'number'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json(userList);
+  }
+
+  async show(req, res) {
+    const userEspecified = await User.findByPk(req.userId, {
+      attributes: ['id', 'name', 'phone', 'email'],
+      include: [
+        {
+          model: Contact,
+          as: 'contacts',
+          attributes: ['id', 'name', 'lastname', 'email'],
+          include: [
+            {
+              model: Address,
+              as: 'addresses',
+              attributes: [
+                'id',
+                'number',
+                'address',
+                'neighborhood',
+                'city',
+                'state',
+                'country',
+                'zipcode',
+              ],
+            },
+            {
+              model: Phone,
+              as: 'phones',
+              attributes: ['id', 'number'],
             },
           ],
         },

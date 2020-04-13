@@ -1,7 +1,7 @@
 import Mail from '../../lib/Mail';
 
 class ConfirmationMail {
-  get Key() {
+  get key() {
     return 'ConfirmationMail';
   }
 

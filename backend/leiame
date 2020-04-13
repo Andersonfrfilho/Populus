@@ -26,8 +26,10 @@ yarn eslint --fix src --ext .js
 
 //create a migrations
 yarn sequelize migration:create --name=create-users
+yarn sequelize seed:generate --name phones
 //rodar migrate
 yarn sequelize db:migrate
+yarn sequelize db:seed:all
 //Revertendo as modificações mais recentes.
 yarn sequelize db:migrate:undo
 //Podendo desfazer para o estado inicial.
