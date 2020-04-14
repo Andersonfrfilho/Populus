@@ -20,6 +20,7 @@ export default function InputIcon({
   functionOnEndingChange,
   placeholder,
   inputMask,
+  iconExist,
   icon,
   typeInput,
 }) {
@@ -40,22 +41,24 @@ export default function InputIcon({
             value={value}
             mask={inputMask}
             placeholder={placeholder}
-            onBlur={functionOnEndingChange}
             type={typeInput}
             onChange={text => functionOnChange(text.target.value)}
             disabled={disabled}
+            onBlur={functionOnEndingChange}
           />
         )}
       </AreaInput>
-      <AreaIcon
-        type="button"
-        button={button}
-        onClick={functionOnClick}
-        error={error}
-        disabled={disabled}
-      >
-        {icon()}
-      </AreaIcon>
+      {iconExist && (
+        <AreaIcon
+          type="button"
+          button={button}
+          onClick={functionOnClick}
+          error={error}
+          disabled={disabled}
+        >
+          {icon()}
+        </AreaIcon>
+      )}
     </AreaInputIcon>
   );
 }
@@ -72,7 +75,7 @@ InputIcon.propTypes = {
   inputMask: PropTypes.string,
   placeholder: PropTypes.string,
   icon: PropTypes.func,
-  width: PropTypes.string,
+  iconExist: PropTypes.bool,
 };
 InputIcon.defaultProps = {
   typeInput: 'button',
@@ -87,5 +90,5 @@ InputIcon.defaultProps = {
   inputMask: '99/99/99',
   placeholder: 'palceholder input:',
   icon: () => <IconDefault />,
-  width: '100%',
+  iconExist: true,
 };

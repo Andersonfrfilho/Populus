@@ -72,6 +72,7 @@ export const AreaInputTitle = styled.div`
   padding-left: 5px;
   padding-right: 5px;
   flex-direction: column;
+  align-items: ${({ flexPosition }) => (flexPosition ? 'flex-end' : 'inherit')};
   @media (min-width: 300px) {
     flex: 1;
   }
@@ -99,6 +100,7 @@ export const AreaTitleInput = styled.div`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
+  padding-top: 10px;
 `;
 export const AreaIconRemove = styled.div`
   display: flex;
@@ -107,7 +109,6 @@ export const AreaIconRemove = styled.div`
   justify-content: center;
   align-items: center;
   height: 40px;
-
   flex: 1;
   :hover {
     cursor: pointer;
@@ -129,7 +130,35 @@ export const AreaIconRemove = styled.div`
     margin-top: 0px;
   }
 `;
-export const TitleInput = styled.h3`
+export const AreaIconRemoveAddress = styled.div`
+  display: flex;
+  background-color: ${colors.boxShadownTransparent};
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  :hover {
+    cursor: pointer;
+    background-color: ${colors.boxShadownBlueTransparent};
+  }
+  :active {
+    background-color: ${colors.boxShadownTransparent};
+  }
+  @media (min-width: 300px) {
+    margin-top: 5px;
+  }
+  @media (min-width: 400px) {
+    margin-top: 5px;
+  }
+  @media (min-width: 800px) {
+    margin-top: 0px;
+  }
+  @media (min-width: 1200px) {
+    margin-top: 0px;
+  }
+`;
+export const TitleInput = styled.h4`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,6 +213,10 @@ export const AreaIconPlusMultiple = styled.div`
   display: flex;
   flex: 1;
   justify-content: flex-end;
+`;
+export const AreaButtonSave = styled.div`
+  display: flex;
+  height: 50px;
 `;
 export const AreaIconPlus = styled.div`
   display: flex;

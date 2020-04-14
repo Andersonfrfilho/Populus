@@ -16,7 +16,6 @@ class Contact extends Model {
     this.addHook('beforeCreate', async contact => {
       contact.name = contact.name.toLowerCase();
       contact.lastname = contact.lastname.toLowerCase();
-      contact.phone = contact.phone.toLowerCase();
       contact.email = contact.email.toLowerCase();
     });
     return this;

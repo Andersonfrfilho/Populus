@@ -52,7 +52,6 @@ export default function TableBody({ infoTable }) {
       {infoTable.map((element, index) => {
         if (index !== 0) {
           const { name, lastname } = element;
-          console.tron.log(element);
           return (
             <Row key={index.toString()}>
               <Column flex={2}>

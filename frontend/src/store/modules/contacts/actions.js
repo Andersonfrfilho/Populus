@@ -18,3 +18,44 @@ export function requestContacts() {
     type: '@contacts/REQUEST_CONTACTS',
   };
 }
+export function requestFindZipCode(index, zipcode) {
+  return {
+    type: '@contacts/REQUEST_FIND_ZIPCODE',
+    payload: {
+      index,
+      zipcode,
+    },
+  };
+}
+export function defineAddress(addressName, neighborhood, city, state, index) {
+  return {
+    type: '@contacts/DEFINE_ADDRESS',
+    payload: {
+      addressName,
+      neighborhood,
+      city,
+      state,
+      index,
+    },
+  };
+}
+export function loadingLocal(loadingLocalParam) {
+  return {
+    type: '@contacts/DEFINE_LOCAL',
+    payload: {
+      loadingLocalParam,
+    },
+  };
+}
+export function requestSaveContact(name, lastname, email, phones, addresses) {
+  return {
+    type: '@contacts/REQUEST_SAVE_CONTACT',
+    payload: {
+      name,
+      lastname,
+      email,
+      phones,
+      addresses,
+    },
+  };
+}

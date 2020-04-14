@@ -17,10 +17,12 @@ import {
   AreaIconAdd,
 } from './styles';
 import { icons } from '../../styles';
+import Loader from '../Loader';
 
 export default function TableHeader({
   title,
   titleHeaderModal,
+  loadingLocal,
   // inputs-name
   titleInputNameModal,
   typeInputNameModal,
@@ -148,7 +150,8 @@ export default function TableHeader({
   iconInputAddressesCountryModal,
   functionOnChangeInputAddressesCountryModal,
   functionOnEndingChangeAddressesCountryModal,
-
+  //= ===================array addresses
+  arrayAddressesModal,
   //= ============
   placeholderInputSearch,
   functionOnChange,
@@ -159,6 +162,11 @@ export default function TableHeader({
   functionModalOpen,
   visibleModal,
   options,
+  // Icon button
+  titleButtonModal,
+  functionOnClickButtonSaveModal,
+  disabledButtonSaveModal,
+  iconButtonSaveModal,
 }) {
   return (
     <AreaTitleSearchTable>
@@ -166,6 +174,7 @@ export default function TableHeader({
         <ModalRegister
           titleHeader={titleHeaderModal}
           functionOnClick={functionModalClosed}
+          loading={loadingLocal}
           // input:name
           titleInputName={titleInputNameModal}
           typeInputName={typeInputNameModal}
@@ -242,6 +251,7 @@ export default function TableHeader({
           areaInputAddressesTitle={areaInputAddressesTitleModal}
           functionOnClickAddAddresses={functionOnClickAddAddressesModal}
           functionOnClickRemoveAddresses={functionOnClickRemoveAddressesModal}
+          arrayAddresses={arrayAddressesModal}
           // fields : addresses : zipcode
           titleInputAddressesZipCode={titleInputAddressesZipCodeModal}
           typeInputAddressesZipCode={typeInputMaskAddressesZipCodeModal}
@@ -340,6 +350,11 @@ export default function TableHeader({
           functionOnEndingChangeAddressesCountry={
             functionOnEndingChangeAddressesCountryModal
           }
+          // button save
+          titleButtonSave={titleButtonModal}
+          functionOnClickButtonSave={functionOnClickButtonSaveModal}
+          disabledButtonSave={disabledButtonSaveModal}
+          iconButtonSave={iconButtonSaveModal}
         />
       </Modal>
       <AreaItensTable align="flex-start">
@@ -375,6 +390,7 @@ export default function TableHeader({
 }
 TableHeader.propTypes = {
   title: PropTypes.string,
+  loadingLocal: PropTypes.bool,
   placeholderInputSearch: PropTypes.string,
   functionOnChange: PropTypes.func,
   valueSearch: PropTypes.string,
@@ -513,9 +529,17 @@ TableHeader.propTypes = {
   iconInputAddressesCountryModal: PropTypes.func,
   functionOnChangeInputAddressesCountryModal: PropTypes.func,
   functionOnEndingChangeAddressesCountryModal: PropTypes.func,
+  // Modal : addresses : fields : array
+  arrayAddressesModal: PropTypes.arrayOf(PropTypes.object),
+  // button save modal
+  titleButtonModal: PropTypes.string,
+  functionOnClickButtonSaveModal: PropTypes.func,
+  disabledButtonSaveModal: PropTypes.bool,
+  iconButtonSaveModal: PropTypes.func,
 };
 TableHeader.defaultProps = {
   title: 'título da tabela',
+  loadingLocal: false,
   placeholderInputSearch: 'Pesquisar:',
   functionOnChange: () => {},
   valueSearch: '',
@@ -661,4 +685,28 @@ TableHeader.defaultProps = {
   iconInputAddressesCountryModal: () => <icons.IconDefault />,
   functionOnChangeInputAddressesCountryModal: () => {},
   functionOnEndingChangeAddressesCountryModal: () => {},
+  // Modal : address : fields : array
+  arrayAddressesModal: [
+    {
+      numberValue: '',
+      numberError: false,
+      addressValue: '',
+      addressError: false,
+      neighborhoodValue: '',
+      neighborhoodError: false,
+      cityValue: '',
+      cityError: false,
+      stateValue: '',
+      stateError: false,
+      countryValue: '',
+      countryError: false,
+      zipcodeValue: '',
+      zipcodeError: '',
+    },
+  ],
+  // Button function modal save
+  titleButtonModal: 'Title button',
+  functionOnClickButtonSaveModal: () => {},
+  disabledButtonSaveModal: true,
+  iconButtonSaveModal: () => <icons.IconDefault />,
 };

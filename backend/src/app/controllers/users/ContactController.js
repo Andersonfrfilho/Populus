@@ -1,18 +1,21 @@
 import Contact from '../../models/Contact';
 import Address from '../../models/Address';
 import Phone from '../../models/Phone';
-
+import User from '../../models/User'
 class ContactController {
   async store(req, res) {
-    const { name, lastname, phone, email } = req.body;
+    const { name, lastname, email } = req.body;
+    const user = await User.findByPk(req.userId)
+    if(!user){
+      return res.status(400).json({ error: 'usuario não exite' });
+    }
     const newContact = {
       name,
       lastname,
-      phone,
       email,
       fk_user_id: req.userId,
     };
-    const emailExist = await Contact.findOne({ where: { email } });
+    const emailExist = await Contact.findOne({ where: { email:email.toLowerCase() } });
     if (emailExist) {
       return res.status(400).json({ error: 'email ja cadastrado' });
     }
@@ -26,11 +29,7 @@ class ContactController {
   async show(req, res) {
     const { page = 1, pageSize = 10, order = ['name'], idContact } = req.query;
     const listContacts = await Contact.findOne(idContact, {
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
       attributes: ['id', 'name', 'lastname', 'email'],
-      order,
-      where: { fk_user_id: req.userId },
       include: [
         {
           model: Address,
@@ -49,7 +48,7 @@ class ContactController {
         {
           model: Phone,
           as: 'phones',
-          attributes: ['id', 'number'],
+          attributes: ['id', 'number','description'],
         },
       ],
     });

@@ -16,6 +16,12 @@ const INITIAL_STATE = {
     },
   ],
   names: [],
+  addressName: '',
+  neighborhood: '',
+  city: '',
+  state: '',
+  index: null,
+  loadingLocal: false,
 };
 
 export default function contacts(state = INITIAL_STATE, action) {
@@ -25,6 +31,19 @@ export default function contacts(state = INITIAL_STATE, action) {
         draft.name = action.payload.name;
         draft.contacts = action.payload.contacts;
         draft.names = action.payload.names;
+      });
+    case '@contacts/DEFINE_ADDRESS':
+      return produce(state, draft => {
+        draft.addressName = action.payload.addressName;
+        draft.neighborhood = action.payload.neighborhood;
+        draft.city = action.payload.city;
+        draft.state = action.payload.state;
+        draft.index = null;
+        draft.loadingLocal = false;
+      });
+    case '@contacts/DEFINE_LOCAL':
+      return produce(state, draft => {
+        draft.loadingLocal = action.payload.loadingLocalParam;
       });
 
     default:

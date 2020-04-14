@@ -17,15 +17,25 @@ import { icons } from '../../styles';
 
 function ContactList() {
   const { loading, error, message } = useSelector(state => state.commons);
-  const { contacts, names } = useSelector(state => state.contacts);
+  const {
+    contacts,
+    names,
+    address,
+    loadingLocal,
+    addressName,
+    neighborhood,
+    city,
+    state,
+    index,
+  } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
+
   const [inputNameValue, setInputNameValue] = useState('');
   const [inputNameError, setInputNameError] = useState(null);
   const [inputLastnameValue, setInputLastnameValue] = useState('');
   const [inputLastnameError, setInputLastnameError] = useState(null);
   const [inputEmailValue, setInputEmailValue] = useState('');
   const [inputEmailError, setInputEmailError] = useState(null);
-  const [inputPhoneNumberError, setInputPhoneNumberError] = useState(null);
   const [phoneProperties, setPhoneProperties] = useState([
     {
       numberValue: '',
@@ -34,7 +44,7 @@ function ContactList() {
       descriptionError: false,
     },
   ]);
-  const [addressesProperties, setaddressesProperties] = useState([
+  const [addressesProperties, setAddressesProperties] = useState([
     {
       numberValue: '',
       numberError: false,
@@ -52,17 +62,28 @@ function ContactList() {
       zipcodeError: '',
     },
   ]);
-  const [inputPhoneDescriptionValue, setInpuPhoneDescriptionValue] = useState(
-    ''
-  );
-  const [inputPhoneDescriptionError, setInpuPhoneDescriptionError] = useState(
-    null
-  );
+  const [inputPhoneError, setPhoneError] = useState(null);
+  const [inputAddressError, setInputAddressError] = useState(null);
   useEffect(() => {
     if (contacts.length === 0) {
       dispatch(ContactsActions.requestContacts());
     }
   }, []); //eslint-disable-line
+  useEffect(() => {
+    const newArray = addressesProperties.map((addressParam, indexParam) => {
+      if (indexParam === index) {
+        return {
+          ...addressParam,
+          addressValue: addressName,
+          neighborhoodValue: neighborhood,
+          cityValue: city,
+          stateValue: state,
+        };
+      }
+      return addressParam;
+    });
+    setAddressesProperties(newArray);
+  }, [addressName, neighborhood, city, state, index]);//eslint-disable-line
   const [visibleModal, setVisibleModal] = useState(false);
 
   function goToPageAddContact() {
@@ -85,7 +106,7 @@ function ContactList() {
     const errorResult = verifyEmail(mailParam);
     setInputEmailError(errorResult);
   }
-  function functionAddPhoneNumber(phonesParam) {
+  function functionAddPhone(phonesParam) {
     const newNumbers = [...phonesParam];
     newNumbers.push({
       numberValue: '',
@@ -95,7 +116,7 @@ function ContactList() {
     });
     setPhoneProperties(newNumbers);
   }
-  function functionRemovePhoneNumber(phonesParam) {
+  function functionRemovePhone(phonesParam) {
     const newNumbers = [...phonesParam];
     if (newNumbers.length > 1) {
       newNumbers.pop();
@@ -117,6 +138,7 @@ function ContactList() {
   function verifyPhoneNumber(phones) {
     const newPhonesArray = phones.map(phone => {
       const errorPhone = verifyPhone(phone.numberValue);
+      setPhoneError(errorPhone);
       return {
         ...phone,
         numberError: errorPhone,
@@ -139,6 +161,7 @@ function ContactList() {
   function verifyPhoneDescription(phones) {
     const newPhonesArray = phones.map(phone => {
       const errorPhone = verifyName(phone.descriptionValue);
+      setPhoneError(errorPhone);
       return {
         ...phone,
         numberError: errorPhone,
@@ -147,17 +170,292 @@ function ContactList() {
     setPhoneProperties(newPhonesArray);
   }
 
+  function functionAddAddresses(addressesParam) {
+    const newAddress = [...addressesParam];
+    newAddress.push({
+      numberValue: '',
+      numberError: false,
+      addressValue: '',
+      addressError: false,
+      neighborhoodValue: '',
+      neighborhoodError: false,
+      cityValue: '',
+      cityError: false,
+      stateValue: '',
+      stateError: false,
+      countryValue: '',
+      countryError: false,
+      zipcodeValue: '',
+      zipcodeError: '',
+    });
+    setAddressesProperties(newAddress);
+  }
+  function closedModal() {
+    setPhoneProperties([
+      {
+        numberValue: '',
+        descriptionValue: '',
+        numberError: false,
+        descriptionError: false,
+      },
+    ]);
+    setAddressesProperties([
+      {
+        numberValue: '',
+        numberError: false,
+        addressValue: '',
+        addressError: false,
+        neighborhoodValue: '',
+        neighborhoodError: false,
+        cityValue: '',
+        cityError: false,
+        stateValue: '',
+        stateError: false,
+        countryValue: '',
+        countryError: false,
+        zipcodeValue: '',
+        zipcodeError: '',
+      },
+    ]);
+    setPhoneError(null);
+    setInputAddressError(null);
+    setInputNameValue('');
+    setInputNameError(null);
+    setInputLastnameValue('');
+    setInputLastnameError(null);
+    setInputEmailValue('');
+    setInputEmailError(null);
+    setVisibleModal(false);
+  }
+  function functionRemoveAddresses(addressesParam) {
+    const newAddress = [...addressesParam];
+    newAddress.pop();
+    setAddressesProperties(newAddress);
+  }
+  function onChangeAddressesZipCode(valueParam, indexParam, addressesParam) {
+    const newAddresses = addressesParam.map(
+      (addressParam, indexAddressParam) => {
+        if (indexParam === indexAddressParam) {
+          return {
+            ...addressParam,
+            zipcodeValue: valueParam,
+          };
+        }
+        return addressParam;
+      }
+    );
+    setAddressesProperties(newAddresses);
+  }
+  function verifyAddressesZipCode(indexParam, addressesParam) {
+    dispatch(
+      ContactsActions.requestFindZipCode(
+        indexParam,
+        addressesParam[indexParam].zipcodeValue.replace(/[.-]+/g, '')
+      )
+    );
+  }
+  function onChangeAddressesNumber(valueParam, indexParam, addressesParam) {
+    const newAddresses = addressesParam.map(
+      (addressParam, indexAddressParam) => {
+        if (indexParam === indexAddressParam) {
+          return {
+            ...addressParam,
+            numberValue: valueParam,
+          };
+        }
+        return addressParam;
+      }
+    );
+    setAddressesProperties(newAddresses);
+  }
+  function verifyValueAddressesNumber(addressesParam) {
+    const newArray = addressesParam.map(addressParam => {
+      if (addressParam.numberValue === '') {
+        setInputAddressError(true);
+        return {
+          ...addressParam,
+          numberError: true,
+        };
+      }
+      setInputAddressError(false);
+      return { ...addressParam, numberError: false };
+    });
+    setAddressesProperties(newArray);
+  }
+  function onChangeAddressesName(valueParam, indexParam, addressesParam) {
+    const newAddresses = addressesParam.map(
+      (addressParam, indexAddressParam) => {
+        if (indexParam === indexAddressParam) {
+          return {
+            ...addressParam,
+            addressValue: valueParam,
+          };
+        }
+        return addressParam;
+      }
+    );
+    setAddressesProperties(newAddresses);
+  }
+  function verifyValueAddressesName(addressesParam) {
+    const newArray = addressesParam.map(addressParam => {
+      if (addressParam.addressValue === '') {
+        setInputAddressError(true);
+        return {
+          ...addressParam,
+          addressError: true,
+        };
+      }
+      setInputAddressError(false);
+      return { ...addressParam, addressError: false };
+    });
+    setAddressesProperties(newArray);
+  }
+  function onChangeAddressesNeighborhood(
+    valueParam,
+    indexParam,
+    addressesParam
+  ) {
+    const newAddresses = addressesParam.map(
+      (addressParam, indexAddressParam) => {
+        if (indexParam === indexAddressParam) {
+          return {
+            ...addressParam,
+            neighborhoodValue: valueParam,
+          };
+        }
+        return addressParam;
+      }
+    );
+    setAddressesProperties(newAddresses);
+  }
+  function verifyValueAddressesNeighborhood(addressesParam) {
+    const newArray = addressesParam.map(addressParam => {
+      if (addressParam.neighborhoodValue === '') {
+        setInputAddressError(true);
+        return {
+          ...addressParam,
+          neighborhoodError: true,
+        };
+      }
+      setInputAddressError(false);
+      return { ...addressParam, neighborhoodError: false };
+    });
+    setAddressesProperties(newArray);
+  }
+  function onChangeAddressesCity(valueParam, indexParam, addressesParam) {
+    const newAddresses = addressesParam.map(
+      (addressParam, indexAddressParam) => {
+        if (indexParam === indexAddressParam) {
+          return {
+            ...addressParam,
+            cityValue: valueParam,
+          };
+        }
+        return addressParam;
+      }
+    );
+    setAddressesProperties(newAddresses);
+  }
+  function verifyValueAddressesCity(addressesParam) {
+    const newArray = addressesParam.map(addressParam => {
+      if (addressParam.cityValue === '') {
+        setInputAddressError(true);
+        return {
+          ...addressParam,
+          cityError: true,
+        };
+      }
+      setInputAddressError(false);
+      return { ...addressParam, cityError: false };
+    });
+    setAddressesProperties(newArray);
+  }
+  function onChangeAddressesState(valueParam, indexParam, addressesParam) {
+    const newAddresses = addressesParam.map(
+      (addressParam, indexAddressParam) => {
+        if (indexParam === indexAddressParam) {
+          return {
+            ...addressParam,
+            stateValue: valueParam,
+          };
+        }
+        return addressParam;
+      }
+    );
+    setAddressesProperties(newAddresses);
+  }
+  function verifyValueAddressesState(addressesParam) {
+    const newArray = addressesParam.map(addressParam => {
+      if (addressParam.stateValue === '') {
+        setInputAddressError(true);
+        return {
+          ...addressParam,
+          stateError: true,
+        };
+      }
+      setInputAddressError(false);
+      return { ...addressParam, stateError: false };
+    });
+    setAddressesProperties(newArray);
+  }
+  function onChangeAddressesCountry(valueParam, indexParam, addressesParam) {
+    const newAddresses = addressesParam.map(
+      (addressParam, indexAddressParam) => {
+        if (indexParam === indexAddressParam) {
+          return {
+            ...addressParam,
+            countryValue: valueParam,
+          };
+        }
+        return addressParam;
+      }
+    );
+    setAddressesProperties(newAddresses);
+  }
+  function verifyValueAddressesCountry(addressesParam) {
+    const newArray = addressesParam.map(addressParam => {
+      if (addressParam.countryValue === '') {
+        setInputAddressError(true);
+        return {
+          ...addressParam,
+          countryError: true,
+        };
+      }
+      setInputAddressError(false);
+      return { ...addressParam, countryError: false };
+    });
+    setAddressesProperties(newArray);
+  }
+  function functionSaveContact(
+    nameParam,
+    lastnameParam,
+    emailParam,
+    phonesParam,
+    addressesParam
+  ) {
+    dispatch(
+      ContactsActions.requestSaveContact(
+        nameParam,
+        lastnameParam,
+        emailParam,
+        phonesParam,
+        addressesParam
+      )
+    );
+    // closedModal()
+  }
   return (
     <AreaUserList>
       <AreaHeaderTable>
         <TableHeader
           title="Lista de usuarios"
+          loadingLocal={loadingLocal}
           placeholderInputSearch="Pesquisar:"
           functionOnChange={value => setValueSearch(value)}
           valueSearch={valueSearch}
           functionOnClickClear={() => setValueSearch('')}
           functionOnClickAdd={() => goToPageAddContact()}
-          functionModalClosed={() => setVisibleModal(false)}
+          functionModalClosed={() => closedModal()}
           functionModalOpen={() => setVisibleModal(true)}
           visibleModal={visibleModal}
           options={names}
@@ -205,11 +503,9 @@ function ContactList() {
           errorInputEmailModal={inputEmailError !== null}
           // areaInputPhone //properties
           areaInputPhoneTitleModal="Telefone"
-          functionOnClickAddPhoneModal={() =>
-            functionAddPhoneNumber(phoneProperties)
-          }
+          functionOnClickAddPhoneModal={() => functionAddPhone(phoneProperties)}
           functionOnClickRemovePhoneModal={() =>
-            functionRemovePhoneNumber(phoneProperties)
+            functionRemovePhone(phoneProperties)
           }
           // modal : input :phone number
           titleInputPhoneNumberModal="Número"
@@ -219,8 +515,8 @@ function ContactList() {
           placeholderInputPhoneNumberModal="Digite seu número:"
           disabledInputPhoneNumberModal={loading}
           iconInputPhoneNumberModal={() => <icons.PhoneIcon />}
-          functionOnChangeInputPhoneNumberModal={(value, index) =>
-            onChangePhoneNumber(value, index, phoneProperties)
+          functionOnChangeInputPhoneNumberModal={(value, indexParam) =>
+            onChangePhoneNumber(value, indexParam, phoneProperties)
           }
           functionOnEndingChangePhoneNumberModal={() =>
             verifyPhoneNumber(phoneProperties)
@@ -232,14 +528,128 @@ function ContactList() {
           placeholderInputPhoneDescriptionModal="Digite a descrição:"
           disabledInputPhoneDescriptionModal={loading}
           iconInputPhoneDescriptionModal={() => <icons.IconInformation />}
-          functionOnChangeInputPhoneDescriptionModal={(value, index) =>
-            onChangePhoneDescription(value, index, phoneProperties)
+          functionOnChangeInputPhoneDescriptionModal={(value, indexParam) =>
+            onChangePhoneDescription(value, indexParam, phoneProperties)
           }
           functionOnEndingChangePhoneDescriptionModal={() =>
             verifyPhoneDescription(phoneProperties)
           }
           arrayPhonesModal={phoneProperties}
           // fields
+          areaInputAddressesTitleModal="Endereço"
+          functionOnClickAddAddressesModal={() =>
+            functionAddAddresses(addressesProperties)
+          }
+          functionOnClickRemoveAddressesModal={() =>
+            functionRemoveAddresses(addressesProperties)
+          }
+          arrayAddressesModal={addressesProperties}
+          // Modal : fields: register :zipCode
+          titleInputAddressesZipCodeModal="C.E.P"
+          typeInputMaskAddressesZipCodeModal="mask"
+          typeInputAddressesZipCodeFormatModal="text"
+          placeholderAddressesZipCodeModal="Digite seu C.E.P"
+          disabledInputAddressesesZipCodeModal={loading}
+          inputMaskAddressesZipCodeModal="99.999-999"
+          functionOnChangeInputAddressesZipCodeModal={(value, indexParam) =>
+            onChangeAddressesZipCode(value, indexParam, addressesProperties)
+          }
+          functionOnEndingChangeAddressesZipCodeModal={indexParam =>
+            verifyAddressesZipCode(indexParam, addressesProperties)
+          }
+          // // Modal :fields : register :number
+          titleInputAddressesNumberModal="Número"
+          typeInputAddressesNumberModal="text"
+          typeInputAddressesNumberFormatModal="text"
+          placeholderAddressesNumberModal="Digite um número:"
+          disabledInputAddressesesNumberModal={loading}
+          functionOnChangeInputAddressesNumberModal={(value, indexParam) =>
+            onChangeAddressesNumber(value, indexParam, addressesProperties)
+          }
+          functionOnEndingChangeAddressesNumberModal={() =>
+            verifyValueAddressesNumber(addressesProperties)
+          }
+          // // Modal :fields : register :name
+          titleInputAddressesNameModal="Endereço"
+          typeInputAddressesNameModal="text"
+          typeInputAddressesNameFormatModal="text"
+          placeholderAddressesNameModal="Digite seu endereço:"
+          disabledInputAddressesesNameModal={loading}
+          functionOnChangeInputAddressesNameModal={(value, indexParam) =>
+            onChangeAddressesName(value, indexParam, addressesProperties)
+          }
+          functionOnEndingChangeAddressesNameModal={() =>
+            verifyValueAddressesName(addressesProperties)
+          }
+          // // Modal :fields : register :beihoord
+          titleInputAddressesNeighborhoodModal="Logradouro"
+          typeInputAddressesNeighborhoodModal="text"
+          typeInputAddressesNeighborhoodFormatModal="text"
+          placeholderAddressesNeighborhoodModal="Digite seu logradouro:"
+          disabledInputAddressesesNeighborhoodModal={loading}
+          functionOnChangeInputAddressesNeighborhoodModal={(
+            value,
+            indexParam
+          ) =>
+            onChangeAddressesNeighborhood(
+              value,
+              indexParam,
+              addressesProperties
+            )
+          }
+          functionOnEndingChangeAddressesNeighborhoodModal={() =>
+            verifyValueAddressesNeighborhood(addressesProperties)
+          }
+          // // Modal :fields : register :city
+          titleInputAddressesCityModal="Cidade"
+          typeInputAddressesCityModal="text"
+          typeInputAddressesCityFormatModal="text"
+          placeholderAddressesCityModal="Digite sua cidade:"
+          disabledInputAddressesesCityModal={loading}
+          functionOnChangeInputAddressesCityModal={(value, indexParam) =>
+            onChangeAddressesCity(value, indexParam, addressesProperties)
+          }
+          functionOnEndingChangeAddressesCityModal={() => {
+            verifyValueAddressesCity(addressesProperties);
+          }}
+          // // Modal :fields : register :state
+          titleInputAddressesStateModal="Estado"
+          typeInputMaskAddressesStateModal="text"
+          typeInputAddressesStateFormatModal="text"
+          placeholderAddressesStateModal="Digite seu estado:"
+          disabledInputAddressesesStateModal={loading}
+          functionOnChangeInputAddressesStateModal={(value, indexParam) =>
+            onChangeAddressesState(value, indexParam, addressesProperties)
+          }
+          functionOnEndingChangeAddressesStateModal={() =>
+            verifyValueAddressesState(addressesProperties)
+          }
+          // // Modal :fields : register :country
+          titleInputAddressesCountryModal="País"
+          typeInputMaskAddressesCountryModal="text"
+          typeInputAddressesCountryFormatModal="text"
+          placeholderAddressesCountryModal="Digite seu país:"
+          disabledInputAddressesesCountryModal={loading}
+          functionOnChangeInputAddressesCountryModal={(value, indexParam) =>
+            onChangeAddressesCountry(value, indexParam, addressesProperties)
+          }
+          functionOnEndingChangeAddressesCountryModal={() =>
+            verifyValueAddressesCountry(addressesProperties)
+          }
+          // Modal button save
+          // Button function modal save
+          titleButtonModal="Cadastrar"
+          functionOnClickButtonSaveModal={() =>
+            functionSaveContact(
+              inputNameValue,
+              inputLastnameValue,
+              inputEmailValue,
+              phoneProperties,
+              addressesProperties
+            )
+          }
+          disabledButtonSaveModal={loading}
+          iconButtonSaveModal={() => <icons.IconSave />}
         />
       </AreaHeaderTable>
       <AreaBodyTable>

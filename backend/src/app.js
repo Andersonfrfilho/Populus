@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import redis from 'redis';
 import RateLimit from 'express-rate-limit';
 import RateLimitRedis from 'rate-limit-redis';
-// import * as Sentry from '@sentry/node';
+import * as Sentry from '@sentry/node';
 // import Youch from 'youch';
 import io from 'socket.io';
 import http from 'http';

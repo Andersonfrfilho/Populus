@@ -6,6 +6,7 @@ import ForgotPasswordController from './app/controllers/ForgotPasswordController
 import ContactController from './app/controllers/users/ContactController';
 import AddressController from './app/controllers/AddressController';
 import SessionController from './app/controllers/users/SessionController';
+import PhoneController from './app/controllers/PhoneController';
 import authMiddleware from './app/middlewares/auth';
 import { cloudinaryConfig } from './config/cloudinaryConfig';
 import NotificationController from './app/controllers/NotificationController';
@@ -22,7 +23,9 @@ import validateContactUpdate from './app/validators/users/ContactUpdate';
 // validates : Users : Contact : Address
 import validateAddressStore from './app/validators/addresses/AddressesStore';
 import validateAddressUpdate from './app/validators/addresses/AddressesUpdate';
-
+// validates : Users : Contact : Phone
+import validatePhoneStore from './app/validators/phones/PhonesStore';
+import validatePhoneUpdate from './app/validators/phones/PhonesUpdate';
 const routes = new Router();
 // const bruteStore = new BruteRedis({
 //   host: process.env.REDIS_HOST,
@@ -75,6 +78,38 @@ routes.post(
   '/users/content/contacts/content/addresses',
   validateAddressStore,
   AddressController.store
+);
+routes.get(
+  '/users/content/contacts/content/addresses/:idAddress',
+  AddressController.show
+);
+routes.put(
+  '/users/content/contacts/content/addresses/:id_address',
+  validateAddressUpdate,
+  AddressController.update
+);
+routes.delete(
+  '/users/content/contacts/content/addresses/:id_address',
+  AddressController.destroy
+);
+// routes : contacts : phone
+routes.post(
+  '/users/content/contacts/content/phone',
+  validatePhoneStore,
+  PhoneController.store
+);
+routes.get(
+  '/users/content/contacts/content/phone/:idPhone',
+  PhoneController.show
+);
+routes.put(
+  '/users/content/contacts/content/phone/:id_phone',
+  validatePhoneUpdate,
+  PhoneController.update
+);
+routes.delete(
+  '/users/content/contacts/content/phone/:id_phone',
+  PhoneController.destroy
 );
 routes.get('/notifications', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);

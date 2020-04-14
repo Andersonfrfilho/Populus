@@ -20,13 +20,17 @@ import {
   AreaIconPlus,
   AreaIconRemove,
   AreaInputRemove,
+  AreaIconRemoveAddress,
+  AreaButtonSave,
 } from './styles';
 import InputIcon from '../InputIcon';
 import ButtonIcon from '../ButtonIcon';
 import { icons, colors } from '../../styles';
+import Loader from '../Loader';
 
 export default function ModalRegister({
   titleHeader,
+  loading,
   functionOnClick,
   titleInputName,
   typeInputName,
@@ -87,6 +91,7 @@ export default function ModalRegister({
   // fields : addresses : zipcode
   titleInputAddressesZipCode,
   typeInputAddressesZipCode,
+  typeInputAddressesZipCodeFormat,
   placeholderInputAddressesZipCode,
   disabledInputAddressesZipCode,
   iconInputAddressesZipCode,
@@ -141,6 +146,11 @@ export default function ModalRegister({
   iconInputAddressesCountry,
   functionOnChangeInputAddressesCountry,
   functionOnEndingChangeAddressesCountry,
+  // fields : button
+  titleButtonSave,
+  functionOnClickButtonSave,
+  disabledButtonSave,
+  iconButtonSave,
 }) {
   return (
     <AreaModal>
@@ -223,6 +233,7 @@ export default function ModalRegister({
             />
           </AreaIconPlus>
         </AreaIconPlusMultiple>
+
         {arrayPhones.map((phone, index) => {
           return (
             <>
@@ -300,164 +311,204 @@ export default function ModalRegister({
             />
           </AreaIconPlus>
         </AreaIconPlusMultiple>
-        {arrayAddresses.map((address, index) => {
-          return (
-            <>
-              <AreaInputs>
-                <AreaInputTitle flex={0.2}>
-                  <AreaTitleInput>
-                    <TitleInput>{titleInputAddressesZipCode}</TitleInput>
-                  </AreaTitleInput>
-                  <InputIcon
-                    type={typeInputAddressesZipCode}
-                    typeInput={typeInputAddressesZipCode}
-                    placeholder={placeholderInputAddressesZipCode}
-                    disabled={disabledInputAddressesZipCode}
-                    icon={iconInputAddressesZipCode}
-                    inputMask={inputMaskAddressesZipCode}
-                    functionOnChange={text =>
-                      functionOnChangeInputAddressesZipCode(text, index)
-                    }
-                    functionOnEndingChange={
-                      functionOnEndingChangeAddressesZipCode
-                    }
-                    value={address.zipcodeValue}
-                    error={address.zipcodeError}
-                  />
-                </AreaInputTitle>
-              </AreaInputs>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            {arrayAddresses.map((address, index) => {
+              return (
+                <>
+                  <AreaInputs>
+                    <AreaInputTitle flex={0.2}>
+                      <AreaTitleInput>
+                        <TitleInput>{titleInputAddressesZipCode}</TitleInput>
+                      </AreaTitleInput>
+                      <InputIcon
+                        typeInput={typeInputAddressesZipCodeFormat}
+                        type="mask"
+                        placeholder={placeholderInputAddressesZipCode}
+                        disabled={disabledInputAddressesZipCode}
+                        icon={iconInputAddressesZipCode}
+                        inputMask={inputMaskAddressesZipCode}
+                        functionOnChange={text =>
+                          functionOnChangeInputAddressesZipCode(text, index)
+                        }
+                        functionOnEndingChange={() =>
+                          functionOnEndingChangeAddressesZipCode(index)
+                        }
+                        value={address.zipcodeValue}
+                        error={address.zipcodeError}
+                        iconExist={false}
+                      />
+                    </AreaInputTitle>
+                    <AreaInputTitle flexPosition>
+                      <AreaTitleInput />
+                      {index === 0 ? null : (
+                        <AreaIconRemoveAddress
+                          onClick={functionOnClickRemoveAddresses}
+                        >
+                          <icons.ClosedTimesIcon color={colors.dark} />
+                        </AreaIconRemoveAddress>
+                      )}
+                    </AreaInputTitle>
+                  </AreaInputs>
 
-              <AreaInputs>
-                <AreaInputTitle flex={2}>
-                  <AreaTitleInput>
-                    <TitleInput>{titleInputAddressesName}</TitleInput>
-                  </AreaTitleInput>
-                  <InputIcon
-                    type={typeInputAddressesName}
-                    typeInput={typeInputAddressesName}
-                    placeholder={placeholderInputAddressesName}
-                    disabled={disabledInputAddressesName}
-                    icon={iconInputAddressesName}
-                    functionOnChange={text =>
-                      functionOnChangeInputAddressesName(text, index)
-                    }
-                    functionOnEndingChange={functionOnEndingChangeAddressesName}
-                    value={address.addressValue}
-                    error={address.addressError}
-                  />
-                </AreaInputTitle>
-                <AreaInputTitle>
-                  <AreaTitleInput>
-                    <TitleInput>{titleInputAddressesNumber}</TitleInput>
-                  </AreaTitleInput>
-                  <InputIcon
-                    type={typeInputAddressesNumber}
-                    typeInput={typeInputAddressesNumber}
-                    placeholder={placeholderInputAddressesNumber}
-                    disabled={disabledInputAddressesNumber}
-                    icon={iconInputAddressesNumber}
-                    functionOnChange={text =>
-                      functionOnChangeInputAddressesNumber(text, index)
-                    }
-                    functionOnEndingChange={
-                      functionOnEndingChangeAddressesNumber
-                    }
-                    value={address.numberValue}
-                    error={address.numberError}
-                  />
-                </AreaInputTitle>
-              </AreaInputs>
+                  <AreaInputs>
+                    <AreaInputTitle flex={2}>
+                      <AreaTitleInput>
+                        <TitleInput>{titleInputAddressesName}</TitleInput>
+                      </AreaTitleInput>
+                      <InputIcon
+                        type={typeInputAddressesName}
+                        typeInput={typeInputAddressesName}
+                        placeholder={placeholderInputAddressesName}
+                        disabled={disabledInputAddressesName}
+                        icon={iconInputAddressesName}
+                        functionOnChange={text =>
+                          functionOnChangeInputAddressesName(text, index)
+                        }
+                        functionOnEndingChange={
+                          functionOnEndingChangeAddressesName
+                        }
+                        value={address.addressValue}
+                        error={address.addressError}
+                        iconExist={false}
+                      />
+                    </AreaInputTitle>
+                    <AreaInputTitle>
+                      <AreaTitleInput>
+                        <TitleInput>{titleInputAddressesNumber}</TitleInput>
+                      </AreaTitleInput>
+                      <InputIcon
+                        type={typeInputAddressesNumber}
+                        typeInput={typeInputAddressesNumber}
+                        placeholder={placeholderInputAddressesNumber}
+                        disabled={disabledInputAddressesNumber}
+                        icon={iconInputAddressesNumber}
+                        functionOnChange={text =>
+                          functionOnChangeInputAddressesNumber(text, index)
+                        }
+                        functionOnEndingChange={
+                          functionOnEndingChangeAddressesNumber
+                        }
+                        value={address.numberValue}
+                        error={address.numberError}
+                        iconExist={false}
+                      />
+                    </AreaInputTitle>
+                  </AreaInputs>
 
-              <AreaInputs>
-                <AreaInputTitle>
-                  <AreaTitleInput>
-                    <TitleInput>{titleInputAddressesNeighborhood}</TitleInput>
-                  </AreaTitleInput>
-                  <InputIcon
-                    type={typeInputAddressesNeighborhood}
-                    typeInput={typeInputAddressesNeighborhood}
-                    placeholder={placeholderInputAddressesNeighborhood}
-                    disabled={disabledInputAddressesNeighborhood}
-                    icon={iconInputAddressesNeighborhood}
-                    functionOnChange={text =>
-                      functionOnChangeInputAddressesNeighborhood(text, index)
-                    }
-                    functionOnEndingChange={
-                      functionOnEndingChangeAddressesNeighborhood
-                    }
-                    value={address.neighborhoodValue}
-                    error={address.neighborhoodError}
-                  />
-                </AreaInputTitle>
-                <AreaInputTitle>
-                  <AreaTitleInput>
-                    <TitleInput>{titleInputAddressesCity}</TitleInput>
-                  </AreaTitleInput>
-                  <InputIcon
-                    type={typeInputAddressesCity}
-                    typeInput={typeInputAddressesCity}
-                    placeholder={placeholderInputAddressesCity}
-                    disabled={disabledInputAddressesCity}
-                    icon={iconInputAddressesCity}
-                    functionOnChange={text =>
-                      functionOnChangeInputAddressesCity(text, index)
-                    }
-                    functionOnEndingChange={functionOnEndingChangeAddressesCity}
-                    value={address.cityValue}
-                    error={address.cityError}
-                  />
-                </AreaInputTitle>
-              </AreaInputs>
+                  <AreaInputs>
+                    <AreaInputTitle>
+                      <AreaTitleInput>
+                        <TitleInput>
+                          {titleInputAddressesNeighborhood}
+                        </TitleInput>
+                      </AreaTitleInput>
+                      <InputIcon
+                        type={typeInputAddressesNeighborhood}
+                        typeInput={typeInputAddressesNeighborhood}
+                        placeholder={placeholderInputAddressesNeighborhood}
+                        disabled={disabledInputAddressesNeighborhood}
+                        icon={iconInputAddressesNeighborhood}
+                        functionOnChange={text =>
+                          functionOnChangeInputAddressesNeighborhood(
+                            text,
+                            index
+                          )
+                        }
+                        functionOnEndingChange={
+                          functionOnEndingChangeAddressesNeighborhood
+                        }
+                        value={address.neighborhoodValue}
+                        error={address.neighborhoodError}
+                        iconExist={false}
+                      />
+                    </AreaInputTitle>
+                    <AreaInputTitle>
+                      <AreaTitleInput>
+                        <TitleInput>{titleInputAddressesCity}</TitleInput>
+                      </AreaTitleInput>
+                      <InputIcon
+                        type={typeInputAddressesCity}
+                        typeInput={typeInputAddressesCity}
+                        placeholder={placeholderInputAddressesCity}
+                        disabled={disabledInputAddressesCity}
+                        icon={iconInputAddressesCity}
+                        functionOnChange={text =>
+                          functionOnChangeInputAddressesCity(text, index)
+                        }
+                        functionOnEndingChange={
+                          functionOnEndingChangeAddressesCity
+                        }
+                        value={address.cityValue}
+                        error={address.cityError}
+                        iconExist={false}
+                      />
+                    </AreaInputTitle>
+                  </AreaInputs>
 
-              <AreaInputs>
-                <AreaInputTitle>
-                  <AreaTitleInput>
-                    <TitleInput>{titleInputAddressesState}</TitleInput>
-                  </AreaTitleInput>
-                  <InputIcon
-                    type={typeInputAddressesState}
-                    typeInput={typeInputAddressesState}
-                    placeholder={placeholderInputAddressesState}
-                    disabled={disabledInputAddressesState}
-                    icon={iconInputAddressesState}
-                    functionOnChange={text =>
-                      functionOnChangeInputAddressesState(text, index)
-                    }
-                    functionOnEndingChange={
-                      functionOnEndingChangeAddressesState
-                    }
-                    value={address.stateValue}
-                    error={address.stateError}
-                  />
-                </AreaInputTitle>
-                <AreaInputTitle>
-                  <AreaTitleInput>
-                    <TitleInput>{titleInputAddressesCountry}</TitleInput>
-                  </AreaTitleInput>
-                  <InputIcon
-                    type={typeInputAddressesCountry}
-                    typeInput={typeInputAddressesCountry}
-                    placeholder={placeholderInputAddressesCountry}
-                    disabled={disabledInputAddressesCountry}
-                    icon={iconInputAddressesCountry}
-                    functionOnChange={text =>
-                      functionOnChangeInputAddressesCountry(text, index)
-                    }
-                    functionOnEndingChange={
-                      functionOnEndingChangeAddressesCountry
-                    }
-                    value={address.countryValue}
-                    error={address.countryError}
-                  />
-                </AreaInputTitle>
-              </AreaInputs>
-              <AreaUnderline>
-                <Underline />
-              </AreaUnderline>
-            </>
-          );
-        })}
+                  <AreaInputs>
+                    <AreaInputTitle>
+                      <AreaTitleInput>
+                        <TitleInput>{titleInputAddressesState}</TitleInput>
+                      </AreaTitleInput>
+                      <InputIcon
+                        type={typeInputAddressesState}
+                        typeInput={typeInputAddressesState}
+                        placeholder={placeholderInputAddressesState}
+                        disabled={disabledInputAddressesState}
+                        icon={iconInputAddressesState}
+                        functionOnChange={text =>
+                          functionOnChangeInputAddressesState(text, index)
+                        }
+                        functionOnEndingChange={
+                          functionOnEndingChangeAddressesState
+                        }
+                        value={address.stateValue}
+                        error={address.stateError}
+                        iconExist={false}
+                      />
+                    </AreaInputTitle>
+                    <AreaInputTitle>
+                      <AreaTitleInput>
+                        <TitleInput>{titleInputAddressesCountry}</TitleInput>
+                      </AreaTitleInput>
+                      <InputIcon
+                        type={typeInputAddressesCountry}
+                        typeInput={typeInputAddressesCountry}
+                        placeholder={placeholderInputAddressesCountry}
+                        disabled={disabledInputAddressesCountry}
+                        icon={iconInputAddressesCountry}
+                        functionOnChange={text =>
+                          functionOnChangeInputAddressesCountry(text, index)
+                        }
+                        functionOnEndingChange={
+                          functionOnEndingChangeAddressesCountry
+                        }
+                        value={address.countryValue}
+                        error={address.countryError}
+                        iconExist={false}
+                      />
+                    </AreaInputTitle>
+                  </AreaInputs>
+                  <AreaUnderline>
+                    <Underline />
+                  </AreaUnderline>
+                </>
+              );
+            })}
+          </>
+        )}
       </AreaInputsMultiples>
+      <AreaButtonSave>
+        <ButtonIcon
+          title={titleButtonSave}
+          functionOnClick={functionOnClickButtonSave}
+          disabled={disabledButtonSave}
+          icon={iconButtonSave}
+        />
+      </AreaButtonSave>
     </AreaModal>
   );
 }
@@ -524,6 +575,7 @@ ModalRegister.propTypes = {
   // fields : addresses
   titleInputAddressesZipCode: PropTypes.string,
   typeInputAddressesZipCode: PropTypes.string,
+  typeInputAddressesZipCodeFormat: PropTypes.string,
   placeholderInputAddressesZipCode: PropTypes.string,
   disabledInputAddressesZipCode: PropTypes.bool,
   iconInputAddressesZipCode: PropTypes.func,
@@ -584,6 +636,11 @@ ModalRegister.propTypes = {
 
   functionOnChangeInputAddressesCountry: PropTypes.func,
   functionOnEndingChangeAddressesCountry: PropTypes.func,
+  // fields : data
+  titleButtonSave: PropTypes.string,
+  functionOnClickButtonSave: PropTypes.func,
+  disabledButtonSave: PropTypes.bool,
+  iconButtonSave: PropTypes.func,
 };
 ModalRegister.defaultProps = {
   functionOnClick: () => {},
@@ -672,6 +729,7 @@ ModalRegister.defaultProps = {
   functionOnClickRemoveAddresses: () => {},
   // fields : addresses : zipcode
   titleInputAddressesZipCode: 'title input zip-code',
+  typeInputAddressesZipCodeFormat: 'mask',
   typeInputAddressesZipCode: 'text',
   placeholderInputAddressesZipCode: 'palceholder zip-code',
   disabledInputAddressesZipCode: true,
@@ -727,4 +785,9 @@ ModalRegister.defaultProps = {
   iconInputAddressesCountry: () => <icons.IconDefault />,
   functionOnChangeInputAddressesCountry: () => {},
   functionOnEndingChangeAddressesCountry: () => {},
+  // fields : data
+  titleButtonSave: 'title button ',
+  functionOnClickButtonSave: () => {},
+  disabledButtonSave: false,
+  iconButtonSave: () => <icons.IconDefault />,
 };

@@ -36,16 +36,11 @@ class AddressController {
 
   async show(req, res) {
     const {
-      page = 1,
-      pageSize = 10,
-      order = ['name'],
       idAddress,
-      idContact,
     } = req.query;
-    const listAddresses = await Address.findOne(idAddress, {
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
+    const showAddresses = await Address.findByPk(idAddress, {
       attributes: [
+        'id',
         'number',
         'address',
         'neighborhood',
@@ -54,13 +49,11 @@ class AddressController {
         'country',
         'zipcode',
       ],
-      order,
-      where: { fk_contact_id: idContact },
     });
-    if (!listAddresses) {
+    if (!showAddresses) {
       return res.status(400).json({ error: 'Address not find' });
     }
-    return res.json(listAddresses);
+    return res.json(showAddresses);
   }
 
   async update(req, res) {
@@ -75,7 +68,7 @@ class AddressController {
 
   async destroy(req, res) {
     const { id_address } = req.query;
-    const address = await Contact.findByPk(id_address);
+    const address = await Address.findByPk(id_address);
     if (!address) {
       return res.status(400).json({ error: 'Contact not exist' });
     }
