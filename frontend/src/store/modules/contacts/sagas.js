@@ -7,8 +7,13 @@ import {
   failureAction,
   breakAction,
 } from '../common/actions';
-import { errorVerify } from '../../../utils';
-import { defineInformationUser, defineAddress, loadingLocal } from './actions';
+import { errorVerify, NewException } from '../../../utils';
+import {
+  defineInformationUser,
+  defineAddress,
+  loadingLocal,
+  closedModal,
+} from './actions';
 import api from '../../../services/api';
 import { history } from '../../../services/history';
 
@@ -79,15 +84,27 @@ function* requestFindZipCode({ payload: { index, zipcode } }) {
         bairro: neighborhood,
         localidade: city,
         uf: state,
+        erro,
       },
     } = yield call(axios.get, `https://viacep.com.br/ws/${zipcode}/json/`);
-    yield put(defineAddress(addressName, neighborhood, city, state, index));
+
+    if (erro) {
+      throw new NewException('erro cep', 'cep não encontrado.');
+    }
+    console.tron.log(addressName, neighborhood, city, state, index);
+    yield put(
+      defineAddress(addressName, neighborhood, city, state, index, false)
+    );
     toast.success('Cep encontrado');
     yield put(loadingLocal(false));
   } catch (error) {
     const message = errorVerify(error);
-    toast.error(message);
-    yield put(defineAddress('', '', '', '', ''));
+    if (message === 'cep não encontrado.') {
+      toast.warn(message);
+    } else {
+      toast.error(message);
+    }
+    yield put(defineAddress('', '', '', '', null, false));
     yield put(loadingLocal(false));
   }
 }
@@ -177,12 +194,15 @@ function* requestSaveContact({
       dataNames.push(`${contact.name} ${contact.lastname}`);
     });
     yield put(defineInformationUser(user.name, dataInfo, dataNames));
+    yield put(closedModal(false));
+    toast.success('Usuário cadastrado');
     yield put(successAction(''));
   } catch (error) {
     const message = errorVerify(error);
-    toast.error(message);
-    yield put(defineAddress('', '', '', '', ''));
+    toast.error('Usuário não cadastrado');
+    yield put(defineAddress('', '', '', '', '', false));
     yield put(failureAction(message));
+    yield put(closedModal(false));
   }
 }
 export default all([

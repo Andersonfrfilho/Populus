@@ -22,6 +22,7 @@ const INITIAL_STATE = {
   state: '',
   index: null,
   loadingLocal: false,
+  modalState: false,
 };
 
 export default function contacts(state = INITIAL_STATE, action) {
@@ -38,14 +39,17 @@ export default function contacts(state = INITIAL_STATE, action) {
         draft.neighborhood = action.payload.neighborhood;
         draft.city = action.payload.city;
         draft.state = action.payload.state;
-        draft.index = null;
-        draft.loadingLocal = false;
+        draft.index = action.payload.index;
+        draft.loadingLocal = action.payload.loadingLocalParam;
       });
     case '@contacts/DEFINE_LOCAL':
       return produce(state, draft => {
         draft.loadingLocal = action.payload.loadingLocalParam;
       });
-
+    case '@contacts/CLOSED_MODAL':
+      return produce(state, draft => {
+        draft.modalState = action.payload.modalState;
+      });
     default:
       return state;
   }

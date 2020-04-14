@@ -16,11 +16,10 @@ class AddressController {
     if (!contactExist) {
       return res.status(400).json({ error: 'Contact not find' });
     }
-    const { id: idPhone } = await Phone.create({number:'123456788997',description:'uhul',fk_contact_id:2});
-    return res.json({
-      id: idPhone,
-      ...newPhone
-    });
+    const response = await Phone.create({number:'123456788997',description:'uhul',fk_contact_id:2});
+    return res.json(
+      response
+    );
   }
   async show(req, res) {
     const {

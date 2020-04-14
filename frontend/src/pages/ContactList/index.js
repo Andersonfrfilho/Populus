@@ -27,6 +27,7 @@ function ContactList() {
     city,
     state,
     index,
+    modalState,
   } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
 
@@ -64,10 +65,9 @@ function ContactList() {
   ]);
   const [inputPhoneError, setPhoneError] = useState(null);
   const [inputAddressError, setInputAddressError] = useState(null);
+  const [visibleModal, setVisibleModal] = useState(false);
   useEffect(() => {
-    if (contacts.length === 0) {
-      dispatch(ContactsActions.requestContacts());
-    }
+    dispatch(ContactsActions.requestContacts());
   }, []); //eslint-disable-line
   useEffect(() => {
     const newArray = addressesProperties.map((addressParam, indexParam) => {
@@ -84,7 +84,10 @@ function ContactList() {
     });
     setAddressesProperties(newArray);
   }, [addressName, neighborhood, city, state, index]);//eslint-disable-line
-  const [visibleModal, setVisibleModal] = useState(false);
+  useEffect(() => {
+    setVisibleModal(modalState);
+  }, [modalState]);//eslint-disable-line
+
 
   function goToPageAddContact() {
     dispatch(ContactsActions.requestToPageAddContact());

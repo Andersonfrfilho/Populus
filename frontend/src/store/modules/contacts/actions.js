@@ -27,7 +27,14 @@ export function requestFindZipCode(index, zipcode) {
     },
   };
 }
-export function defineAddress(addressName, neighborhood, city, state, index) {
+export function defineAddress(
+  addressName,
+  neighborhood,
+  city,
+  state,
+  index,
+  loadingLocalParam
+) {
   return {
     type: '@contacts/DEFINE_ADDRESS',
     payload: {
@@ -36,6 +43,7 @@ export function defineAddress(addressName, neighborhood, city, state, index) {
       city,
       state,
       index,
+      loadingLocalParam,
     },
   };
 }
@@ -56,6 +64,14 @@ export function requestSaveContact(name, lastname, email, phones, addresses) {
       email,
       phones,
       addresses,
+    },
+  };
+}
+export function closedModal(modalState) {
+  return {
+    type: '@contacts/CLOSED_MODAL',
+    payload: {
+      modalState,
     },
   };
 }

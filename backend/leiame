@@ -62,3 +62,6 @@ sem docker
   4-redis-cli -v
   5-sudo service redis-server restart
 git remote add deploy endereço git
+//postbird
+select nextval ('contacts_id_seq')
+/*select setval('phones_id_seq', 91)*/
