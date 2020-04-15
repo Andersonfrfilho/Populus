@@ -75,3 +75,13 @@ export function closedModal(modalState) {
     },
   };
 }
+export function requestSelectAllContacts(id, select, contacts) {
+  return {
+    type: '@contacts/REQUEST_SELECT_CONTACTS',
+    payload: {
+      id,
+      select,
+      contacts,
+    },
+  };
+}

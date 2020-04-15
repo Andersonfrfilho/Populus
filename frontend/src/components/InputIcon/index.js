@@ -23,6 +23,7 @@ export default function InputIcon({
   iconExist,
   icon,
   typeInput,
+  disabledButton,
 }) {
   return (
     <AreaInputIcon>
@@ -54,7 +55,7 @@ export default function InputIcon({
           button={button}
           onClick={functionOnClick}
           error={error}
-          disabled={disabled}
+          disabled={disabledButton}
         >
           {icon()}
         </AreaIcon>
@@ -70,6 +71,7 @@ InputIcon.propTypes = {
   error: PropTypes.bool,
   type: PropTypes.string,
   disabled: PropTypes.bool,
+  disabledButton: PropTypes.bool,
   value: PropTypes.string,
   functionOnEndingChange: PropTypes.func,
   inputMask: PropTypes.string,
@@ -80,6 +82,7 @@ InputIcon.propTypes = {
 InputIcon.defaultProps = {
   typeInput: 'button',
   button: false,
+  disabledButton: false,
   functionOnClick: () => {},
   functionOnChange: () => {},
   error: false,

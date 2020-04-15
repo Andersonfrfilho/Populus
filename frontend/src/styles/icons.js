@@ -17,6 +17,7 @@ import {
   FaUserFriends,
   FaInfoCircle,
   FaSave,
+  FaUserEdit,
 } from 'react-icons/fa';
 import colors from './colors';
 import metrics from './metrics';
@@ -89,6 +90,10 @@ export const IconSave = styled(FaSave)`
   color: ${({ color = colors.pickerOne }) => color};
   font-size: ${({ aditional = 6 }) => metrics.fontSize + aditional}px;
 `;
+export const IconUserEdit = styled(FaUserEdit)`
+  color: ${({ color = colors.pickerOne }) => color};
+  font-size: ${({ aditional = 6 }) => metrics.fontSize + aditional}px;
+`;
 export default {
   UserIcon,
   IconDefault,
@@ -107,4 +112,5 @@ export default {
   UserIconLastname,
   IconInformation,
   IconSave,
+  IconUserEdit,
 };

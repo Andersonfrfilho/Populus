@@ -249,7 +249,7 @@ module.exports = {
           email: 'fidel_hudson43@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'morton',
@@ -257,7 +257,7 @@ module.exports = {
           email: 'jamil80@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'myrna',
@@ -265,7 +265,7 @@ module.exports = {
           email: 'emmanuelle61@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'madonna',
@@ -273,7 +273,7 @@ module.exports = {
           email: 'pete_parker@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'mason',
@@ -281,7 +281,7 @@ module.exports = {
           email: 'retha.dare@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'liliana',
@@ -289,7 +289,7 @@ module.exports = {
           email: 'isabell.kunze3@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'aracely',
@@ -297,7 +297,7 @@ module.exports = {
           email: 'elmer95@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'lilyan',
@@ -305,7 +305,7 @@ module.exports = {
           email: 'maryjane1@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'hilton',
@@ -313,7 +313,7 @@ module.exports = {
           email: 'madisyn_schiller16@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'winnifred',
@@ -321,7 +321,7 @@ module.exports = {
           email: 'astrid27@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'marco',
@@ -329,7 +329,7 @@ module.exports = {
           email: 'nasir_cole47@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'marcus',
@@ -337,7 +337,7 @@ module.exports = {
           email: 'lura_koelpin@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'salvatore',
@@ -345,7 +345,7 @@ module.exports = {
           email: 'mackenzie_bartell32@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'michelle',
@@ -353,7 +353,7 @@ module.exports = {
           email: 'fae_harris@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'jevon',
@@ -361,7 +361,7 @@ module.exports = {
           email: 'thalia_jones@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'lela',
@@ -369,7 +369,7 @@ module.exports = {
           email: 'marlene_zieme46@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'lawson',
@@ -377,7 +377,7 @@ module.exports = {
           email: 'arlo40@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'arely',
@@ -385,7 +385,7 @@ module.exports = {
           email: 'else16@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'florida',
@@ -393,7 +393,7 @@ module.exports = {
           email: 'august22@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'jayson',
@@ -401,7 +401,7 @@ module.exports = {
           email: 'jennie.murphy5@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'wanda',
@@ -409,7 +409,7 @@ module.exports = {
           email: 'deanna.mohr58@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'noble',
@@ -417,7 +417,7 @@ module.exports = {
           email: 'mariano_crona5@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'damion',
@@ -425,7 +425,7 @@ module.exports = {
           email: 'alanna_welch56@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'herminia',
@@ -433,7 +433,7 @@ module.exports = {
           email: 'rollin47@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'tanner',
@@ -441,7 +441,7 @@ module.exports = {
           email: 'kirsten47@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'elwyn',
@@ -449,7 +449,7 @@ module.exports = {
           email: 'eriberto.mitchell@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'kole',
@@ -457,7 +457,7 @@ module.exports = {
           email: 'garrick_gleason15@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'jaida',
@@ -465,7 +465,7 @@ module.exports = {
           email: 'princess.corwin@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'verona',
@@ -473,7 +473,7 @@ module.exports = {
           email: 'jovanny21@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'alycia',
@@ -481,7 +481,7 @@ module.exports = {
           email: 'monroe.oconnell98@hotmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'otto',
@@ -489,7 +489,7 @@ module.exports = {
           email: 'michele.bechtelar16@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'elinore',
@@ -497,7 +497,7 @@ module.exports = {
           email: 'ivory_dietrich@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'nikolas',
@@ -505,7 +505,7 @@ module.exports = {
           email: 'lavinia52@yahoo.com',
           created_at: new Date(),
           updated_at: new Date(),
-          fk_user_id: Math.floor(Math.random() * 74) + 1,
+          fk_user_id: 1,
         },
         {
           name: 'kristofer',

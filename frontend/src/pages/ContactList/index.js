@@ -37,6 +37,15 @@ function ContactList() {
   const [inputLastnameError, setInputLastnameError] = useState(null);
   const [inputEmailValue, setInputEmailValue] = useState('');
   const [inputEmailError, setInputEmailError] = useState(null);
+  const [userSelect, setUserSelect] = useState({
+    id: 0,
+    name: '',
+    lastname: '',
+    email: '',
+    select: false,
+    addresses: [],
+    phones: [],
+  });
   const [phoneProperties, setPhoneProperties] = useState([
     {
       numberValue: '',
@@ -66,6 +75,7 @@ function ContactList() {
   const [inputPhoneError, setPhoneError] = useState(null);
   const [inputAddressError, setInputAddressError] = useState(null);
   const [visibleModal, setVisibleModal] = useState(false);
+  const [visibleModalTwo, setVisibleModalTwo] = useState(false);
   useEffect(() => {
     dispatch(ContactsActions.requestContacts());
   }, []); //eslint-disable-line
@@ -85,7 +95,10 @@ function ContactList() {
     setAddressesProperties(newArray);
   }, [addressName, neighborhood, city, state, index]);//eslint-disable-line
   useEffect(() => {
-    setVisibleModal(modalState);
+    if (visibleModal) {
+      setVisibleModal(false);
+      closedModal();
+    }
   }, [modalState]);//eslint-disable-line
 
 
@@ -447,6 +460,157 @@ function ContactList() {
     );
     // closedModal()
   }
+  function openModal() {
+    dispatch(ContactsActions.closedModal(true));
+    setVisibleModal(true);
+  }
+  function openModalTwoOpen(indexParam, contactsParam) {
+    const newUser = {
+      ...contactsParam[indexParam],
+      nameEditable: true,
+      emailEditable: true,
+      lastnameEditable: true,
+      nameError: null,
+      emailError: null,
+      lastnameError: null,
+    };
+    setUserSelect(newUser);
+    setVisibleModalTwo(true);
+  }
+  function closedModalTwoOpen() {
+    setUserSelect({
+      id: 0,
+      name: '',
+      lastname: '',
+      email: '',
+      select: false,
+      addresses: [],
+      phones: [],
+    });
+    setVisibleModalTwo(false);
+  }
+  function selectContact(idParam, selectParam, contactsParam) {
+    dispatch(
+      ContactsActions.requestSelectAllContacts(
+        idParam,
+        selectParam,
+        contactsParam
+      )
+    );
+  }
+  function functionEditorFieldName(contactParam) {
+    const newUser = {
+      ...contactParam,
+      nameEditable: false,
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeName(value, contactParam) {
+    const newUser = {
+      ...contactParam,
+      name: value,
+    };
+    setUserSelect(newUser);
+  }
+  function functionEditorFieldLastname(contactParam) {
+    const newUser = {
+      ...contactParam,
+      lastnameEditable: false,
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeLastname(value, contactParam) {
+    const newUser = {
+      ...contactParam,
+      lastname: value,
+    };
+    setUserSelect(newUser);
+  }
+  function functionEditorFieldEmail(contactParam) {
+    const newUser = {
+      ...contactParam,
+      emailEditable: false,
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeEmail(value, contactParam) {
+    const newUser = {
+      ...contactParam,
+      email: value,
+    };
+    setUserSelect(newUser);
+  }
+  function functionEditorAddPhone(contactParam) {
+    const arrayPhone = [...contactParam.phones];
+    arrayPhone.push({
+      numberValue: '',
+      descriptionValue: '',
+      numberError: false,
+      descriptionError: false,
+      newPhone: true,
+    });
+    const newUser = {
+      ...contactParam,
+      phones: [...arrayPhone],
+    };
+    setUserSelect(newUser);
+  }
+  function functionEditorRemovePhone(contactParam) {
+    const arrayPhone = contactParam.phones.slice(-1);
+    const newUser = {
+      ...contactParam,
+      phones: arrayPhone,
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangePhoneNumber(value, indexParam, contactParam) {
+    const newPhones = contactParam.phones.map((phone, indexPhone) => {
+      if (indexParam === indexPhone) {
+        return {
+          ...phone,
+          number: value,
+        };
+      }
+      return phone;
+    });
+    const newUser = {
+      ...contactParam,
+      phones: [...newPhones],
+    };
+    setUserSelect(newUser);
+  }
+  function functionEditorAddAddresses(contactParam) {
+    const arrayAddress = [...contactParam.address];
+    arrayAddress.push({
+      numberValue: '',
+      numberError: false,
+      addressValue: '',
+      addressError: false,
+      neighborhoodValue: '',
+      neighborhoodError: false,
+      cityValue: '',
+      cityError: false,
+      stateValue: '',
+      stateError: false,
+      countryValue: '',
+      countryError: false,
+      zipcodeValue: '',
+      zipcodeError: false,
+    });
+    const newUser = {
+      ...contactParam,
+      addresses: [...arrayAddress],
+    };
+    setUserSelect(newUser);
+  }
+  function functionEditorRemoveAddresses(contactParam) {
+    const arrayAddress = contactParam.address.slice(-1);
+    const newUser = {
+      ...contactParam,
+      addresses: arrayAddress,
+    };
+    setUserSelect(newUser);
+  }
   return (
     <AreaUserList>
       <AreaHeaderTable>
@@ -459,7 +623,7 @@ function ContactList() {
           functionOnClickClear={() => setValueSearch('')}
           functionOnClickAdd={() => goToPageAddContact()}
           functionModalClosed={() => closedModal()}
-          functionModalOpen={() => setVisibleModal(true)}
+          functionModalOpen={() => openModal()}
           visibleModal={visibleModal}
           options={names}
           titleHeaderModal="Cadastrar usuário"
@@ -651,12 +815,80 @@ function ContactList() {
               addressesProperties
             )
           }
-          disabledButtonSaveModal={loading}
+          disabledButtonSaveModal={
+            loading ||
+            inputNameError ||
+            inputLastnameError ||
+            inputEmailError ||
+            inputPhoneError ||
+            inputAddressError
+          }
           iconButtonSaveModal={() => <icons.IconSave />}
         />
       </AreaHeaderTable>
       <AreaBodyTable>
-        <TableBody infoTable={contacts} />
+        <TableBody
+          infoTable={contacts}
+          functionSelect={(idParam, selectParam) =>
+            selectContact(idParam, selectParam, contacts)
+          }
+          functionViewRow={indexParam => openModalTwoOpen(indexParam, contacts)}
+          // modal
+          visibleModal={visibleModalTwo}
+          functionClosedModal={() => closedModalTwoOpen()}
+          contact={userSelect}
+          // modal : input : name
+          functionOnChangeInputNameModal={text =>
+            functionChangeName(text, userSelect)
+          }
+          functionOnEndingChangeNameModal={() =>
+            verifyNameFunction(userSelect.name)
+          }
+          functionOnEditChangeInputNameModal={() =>
+            functionEditorFieldName(userSelect)
+          }
+          // modal : input : lastname
+          functionOnChangeInputLastnameModal={text =>
+            functionChangeLastname(text, userSelect)
+          }
+          functionOnEndingChangeLastnameModal={() =>
+            verifyLastnameFunction(userSelect.lastname)
+          }
+          functionOnEditChangeInputLastnameModal={() =>
+            functionEditorFieldLastname(userSelect)
+          }
+          // modal : input : e-mail
+          functionOnChangeInputEmailModal={text =>
+            functionChangeEmail(text, userSelect)
+          }
+          functionOnEndingChangeEmailModal={() =>
+            verifyMailFunction(userSelect.email)
+          }
+          functionOnEditChangeInputEmailModal={() =>
+            functionEditorFieldEmail(userSelect)
+          }
+          // modal : input : phone : add
+          functionOnClickAddPhoneModal={() => {
+            functionEditorAddPhone(userSelect);
+          }}
+          functionOnClickRemovePhoneModal={() => {
+            functionEditorRemovePhone(userSelect);
+          }}
+          // modal : input : phone : number
+          functionOnChangeInputPhoneNumberModal={(text, indexParam) =>
+            functionChangePhoneNumber(text, indexParam, userSelect)
+          }
+          functionOnEndingChangePhoneNumberModal={() =>
+            verifyPhoneNumber(userSelect.phones)
+          }
+          // modal : input : phone : add
+          functionOnClickAddAddressesModal={() => {
+            functionEditorAddAddresses(userSelect);
+          }}
+          functionOnClickRemoveAddressesModal={() => {
+            functionEditorRemoveAddresses(userSelect);
+          }}
+        />
       </AreaBodyTable>
     </AreaUserList>
   );

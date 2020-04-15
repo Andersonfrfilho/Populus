@@ -70,7 +70,7 @@ module.exports = {
 
           description: 'home',
           number: '454-341-2031 x7950',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -79,7 +79,7 @@ module.exports = {
 
           description: 'home',
           number: '698.122.2888',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -88,7 +88,7 @@ module.exports = {
 
           description: 'home',
           number: '(454) 921-1691',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -97,7 +97,7 @@ module.exports = {
 
           description: 'home',
           number: '1-911-213-1080',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -106,7 +106,7 @@ module.exports = {
 
           description: 'home',
           number: '806.155.7326',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -115,7 +115,7 @@ module.exports = {
 
           description: 'home',
           number: '375-755-0452',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -124,7 +124,7 @@ module.exports = {
 
           description: 'home',
           number: '1-562-482-9822 x409',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -133,7 +133,7 @@ module.exports = {
 
           description: 'home',
           number: '(841) 317-6819 x8753',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -142,7 +142,7 @@ module.exports = {
 
           description: 'home',
           number: '768-312-5219',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -151,7 +151,7 @@ module.exports = {
 
           description: 'home',
           number: '802-107-2222 x730',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -160,7 +160,7 @@ module.exports = {
 
           description: 'home',
           number: '1-837-672-4188 x48046',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -169,7 +169,7 @@ module.exports = {
 
           description: 'home',
           number: '1-189-182-6605 x55997',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -178,7 +178,7 @@ module.exports = {
 
           description: 'home',
           number: '029-939-8713',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -187,7 +187,7 @@ module.exports = {
 
           description: 'home',
           number: '1-725-140-7525',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -196,7 +196,7 @@ module.exports = {
 
           description: 'home',
           number: '1-306-520-0876',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -205,7 +205,7 @@ module.exports = {
 
           description: 'home',
           number: '(651) 085-1766 x16224',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -214,7 +214,7 @@ module.exports = {
 
           description: 'home',
           number: '655-949-9601',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -223,7 +223,7 @@ module.exports = {
 
           description: 'home',
           number: '(002) 688-3463',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -232,7 +232,7 @@ module.exports = {
 
           description: 'home',
           number: '304-148-2837 x150',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -241,7 +241,7 @@ module.exports = {
 
           description: 'home',
           number: '(755) 175-2563 x9485',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -250,7 +250,7 @@ module.exports = {
 
           description: 'home',
           number: '1-544-301-8768',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -259,7 +259,7 @@ module.exports = {
 
           description: 'home',
           number: '584-667-4015',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -268,7 +268,7 @@ module.exports = {
 
           description: 'home',
           number: '963-471-3635 x79773',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -277,7 +277,7 @@ module.exports = {
 
           description: 'home',
           number: '(566) 778-3507 x46270',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -286,7 +286,7 @@ module.exports = {
 
           description: 'home',
           number: '908.518.2031',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -295,7 +295,7 @@ module.exports = {
 
           description: 'home',
           number: '898.433.6735 x6557',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -304,7 +304,7 @@ module.exports = {
 
           description: 'home',
           number: '395-116-0189 x80125',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -313,7 +313,7 @@ module.exports = {
 
           description: 'home',
           number: '375-122-9930',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -322,7 +322,7 @@ module.exports = {
 
           description: 'home',
           number: '1-091-047-8762 x75356',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -331,7 +331,7 @@ module.exports = {
 
           description: 'home',
           number: '187-720-2197',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -340,7 +340,7 @@ module.exports = {
 
           description: 'home',
           number: '440.111.0574 x018',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -349,7 +349,7 @@ module.exports = {
 
           description: 'home',
           number: '719.712.1993',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -358,7 +358,7 @@ module.exports = {
 
           description: 'home',
           number: '516-751-7774 x2714',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -367,7 +367,7 @@ module.exports = {
 
           description: 'home',
           number: '(544) 450-0660 x24929',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -376,7 +376,7 @@ module.exports = {
 
           description: 'home',
           number: '481-644-5952',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -385,7 +385,7 @@ module.exports = {
 
           description: 'home',
           number: '362-333-9226',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -394,7 +394,7 @@ module.exports = {
 
           description: 'home',
           number: '1-806-632-0652',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -403,7 +403,7 @@ module.exports = {
 
           description: 'home',
           number: '(199) 632-3664 x581',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -412,7 +412,7 @@ module.exports = {
 
           description: 'home',
           number: '(374) 595-1644',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -421,7 +421,7 @@ module.exports = {
 
           description: 'home',
           number: '1-737-656-8415',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -430,7 +430,7 @@ module.exports = {
 
           description: 'home',
           number: '(597) 942-1877 x76148',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -439,7 +439,7 @@ module.exports = {
 
           description: 'home',
           number: '505.347.0458 x19019',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -448,7 +448,7 @@ module.exports = {
 
           description: 'home',
           number: '1-605-604-1602 x050',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -457,7 +457,7 @@ module.exports = {
 
           description: 'home',
           number: '426-551-2588 x173',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -466,7 +466,7 @@ module.exports = {
 
           description: 'home',
           number: '(610) 418-8039',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -475,7 +475,7 @@ module.exports = {
 
           description: 'home',
           number: '(821) 711-4795',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -484,7 +484,7 @@ module.exports = {
 
           description: 'home',
           number: '1-279-164-2706',
-          fk_contact_id: Math.floor(Math.random() * 75) + 1,
+          fk_contact_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },

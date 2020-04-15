@@ -58,7 +58,7 @@ class UserController {
             {
               model: Phone,
               as: 'phones',
-              attributes: ['id', 'number'],
+              attributes: ['id', 'number', 'description'],
             },
           ],
         },

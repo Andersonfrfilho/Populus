@@ -22,7 +22,7 @@ const INITIAL_STATE = {
   state: '',
   index: null,
   loadingLocal: false,
-  modalState: false,
+  modalState: true,
 };
 
 export default function contacts(state = INITIAL_STATE, action) {

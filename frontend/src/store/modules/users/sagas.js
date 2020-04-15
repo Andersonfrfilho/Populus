@@ -51,7 +51,7 @@ function* requestLogin({ payload: { email, password } }) {
       contact => `${contact.name} ${contact.lastname}`
     );
     contacts.forEach(contact => {
-      newDataContacts.push(contact);
+      newDataContacts.push({ ...contact, select: false });
     });
 
     yield put(defineInformationUser(user.name, newDataContacts, dataNames));

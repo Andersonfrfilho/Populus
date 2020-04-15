@@ -62,6 +62,7 @@ function* requestContacts() {
     contacts.forEach(contact => {
       dataInfo.push({
         ...contact,
+        select: false,
       });
       dataNames.push(`${contact.name} ${contact.lastname}`);
     });
@@ -111,7 +112,7 @@ function* requestFindZipCode({ payload: { index, zipcode } }) {
 function* requestSaveContact({
   payload: { name, lastname, email, phones, addresses },
 }) {
-  yield put(loading(true));
+  yield put(loading(''));
   try {
     const token = localStorage.getItem('populus@token');
     if (token === null || token === '') {
@@ -190,6 +191,7 @@ function* requestSaveContact({
     contacts.forEach(contact => {
       dataInfo.push({
         ...contact,
+        select: false,
       });
       dataNames.push(`${contact.name} ${contact.lastname}`);
     });
@@ -202,12 +204,60 @@ function* requestSaveContact({
     toast.error('Usuário não cadastrado');
     yield put(defineAddress('', '', '', '', '', false));
     yield put(failureAction(message));
-    yield put(closedModal(false));
   }
+}
+function* requestSelectContacts({ payload: { id, select, contacts } }) {
+  let user = localStorage.getItem('populus@user');
+  user = JSON.parse(user);
+  let dataInfo;
+  if (id === 0) {
+    dataInfo = contacts.map((contact, index) => {
+      if (index === 0) {
+        return {
+          options: [
+            {
+              ...contact.options[0],
+              select,
+            },
+          ],
+        };
+      }
+      return {
+        ...contact,
+        select,
+      };
+    });
+  } else {
+    dataInfo = contacts.map((contact, index) => {
+      if (index === 0) {
+        return {
+          options: [
+            {
+              ...contact.options[0],
+              select,
+            },
+          ],
+        };
+      }
+      if (id === contact.id) {
+        return {
+          ...contact,
+          select,
+        };
+      }
+      return contact;
+    });
+  }
+  const dataNames = contacts.map(
+    contact => `${contact.name} ${contact.lastname}`
+  );
+  yield put(defineInformationUser(user.name, dataInfo, dataNames));
+  yield put(successAction(''));
 }
 export default all([
   takeLatest('@contacts/REQUEST_TO_PAGE_ADD_CONTACT', requestToPageAddContact),
   takeLatest('@contacts/REQUEST_CONTACTS', requestContacts),
   takeLatest('@contacts/REQUEST_FIND_ZIPCODE', requestFindZipCode),
   takeLatest('@contacts/REQUEST_SAVE_CONTACT', requestSaveContact),
+  takeLatest('@contacts/REQUEST_SELECT_CONTACTS', requestSelectContacts),
 ]);
