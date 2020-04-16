@@ -91,7 +91,6 @@ function ContactList() {
   }, [addressName, neighborhood, city, state, index]);//eslint-disable-line
   useEffect(() => {
     if (visibleModal || visibleModalTwo) {
-      console.tron.log('entrou no closed modal');
       setVisibleModal(false);
       closedModal();
       closedModalTwoOpen();
@@ -644,12 +643,6 @@ function ContactList() {
     setUserSelect(newUser);
   }
   function functionEditorRemoveAddresses(indexParam, contactParam) {
-    console.tron.log(
-      indexParam,
-      contactParam,
-      contactParam.addressesExclud,
-      contactParam.addresses[indexParam].id
-    );
     const arrayAddress = contactParam.addresses.filter(
       (address, indexAddress) => indexParam !== indexAddress
     );

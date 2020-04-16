@@ -39,12 +39,6 @@ export default function Header({
       <AreaItems positionLine="flex-end" padding>
         <AreaUserButtonExpand open={openUser}>
           <AreaUserButon exist onClick={functionOnClickUser}>
-            {/* <AreaPhoto exist>
-              <Photo src={avatar} />
-            </AreaPhoto>
-            <AreaTitle>
-              <Title>{name}</Title>
-            </AreaTitle > */}
             <AreaIcon exist>{openUser ? <IconUp /> : <IconDown />}</AreaIcon>
           </AreaUserButon>
           <AreaUserButon exist={openUser} onClick={functionOnClickLogout}>

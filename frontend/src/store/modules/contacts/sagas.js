@@ -119,7 +119,6 @@ function* requestSaveContact({
       yield cancel();
       history.push('/login');
     }
-
     const headers = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -140,7 +139,7 @@ function* requestSaveContact({
     for (let i = 0; i < phones.length; i += 1) {
       yield call(
         api.post,
-        `/users/content/contacts/content/phone`,
+        `/users/content/contacts/content/phones`,
         {
           number: phones[i].numberValue.replace(/[_()+-\s]+/g, ''),
           description: phones[i].descriptionValue,
@@ -149,6 +148,7 @@ function* requestSaveContact({
         headers
       );
     }
+    console.tron.log('uhuçl')
     for (let i = 0; i < addresses.length; i += 1) {
       yield call(
         api.post,
@@ -161,7 +161,7 @@ function* requestSaveContact({
           country: addresses[i].countryValue,
           state: addresses[i].stateValue,
           zipcode: addresses[i].zipcodeValue,
-          contact_id: idContact,
+          fk_contact_id: idContact,
         },
         headers
       );
@@ -199,6 +199,7 @@ function* requestSaveContact({
     toast.success('Usuário cadastrado');
     yield put(successAction(''));
   } catch (error) {
+    console.tron.log(error)
     const message = errorVerify(error);
     toast.error('Usuário não cadastrado');
     yield put(defineAddress('', '', '', '', '', false));

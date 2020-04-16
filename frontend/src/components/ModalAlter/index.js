@@ -157,7 +157,6 @@ export default function ModalRegister({
   disabledButtonSave,
   iconButtonSave,
 }) {
-  console.tron.log(infoUser.addresses);
   return (
     <AreaModal>
       <AreaHeader>

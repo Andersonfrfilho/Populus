@@ -95,6 +95,7 @@ function* requestLoginExist() {
       ],
     },
   ];
+
   contacts.forEach(contact => {
     dataInfo.push(contact);
     dataNames.push(`${contact.name} ${contact.lastname}`);
@@ -103,8 +104,6 @@ function* requestLoginExist() {
   toast.success('login efetuado com sucesso');
   history.push('/drawer');
   yield put(successAction(''));
-
-  yield put();
   history.push('/drawer');
   yield put(successAction(''));
 }

@@ -179,6 +179,7 @@ export default function TableBody({
             functionOnEndingChangeAddressesZipCodeModal
           }
           // fields : addresses : number
+          titleInputAddressesNumber="Número"
           placeholderInputAddressesNumber="digite seu número:"
           functionOnChangeInputAddressesNumber={
             functionOnChangeInputAddressesNumberModal

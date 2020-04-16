@@ -43,44 +43,64 @@ Backend consiste nos seguintes serviços oferecidos: cadastro de usuario, em rea
 #### Requisitos
 <br>
 Para iniciar o projeto você deve ter instalado e em execuçaõ de serviços
+
 * Redis (Banco de processos)
+
 * Postgres (Banco de dados - relacional - Banco de dados (populus))
+
 * Mongo (Banco de dados - não-relacional)
+
 * NodeJs v.10.19 
+
 * Yarn
 
 `obs:Você pode utilizar o docker para evitar a instalação destes implementação`
 
 Comando do docker para instalação dos serviços
-1º - ```docker docker run --name database -e POSTGRES_PASSWORD=102030 -p 5432:5432 -d postgres``` //instalação do servico do postgres
-2º - ```docker docker run --name mongodatabase -p 27017:27017 -d -t mongo``` //instalação do serviço do mongo
-3º - ```docker run --name redisqueue -p 6379:6379 -d -t redis:alpine``` //instalação do serviço do redis
+
+* 1º - ```docker docker run --name database -e POSTGRES_PASSWORD=102030 -p 5432:5432 -d postgres``` //instalação do servico do postgres
+
+* 2º - ```docker docker run --name mongodatabase -p 27017:27017 -d -t mongo``` //instalação do serviço do mongo
+
+* 3º - ```docker run --name redisqueue -p 6379:6379 -d -t redis:alpine``` //instalação do serviço do redis
 
 #### Iniciar
 
 <br>
 Após a instalação de todos os requisitos rode o comando dentro da pasta backend
+
 * yarn
+
 Rode o comando em um terminal de sua preferência
+
 * yarn queue
+
 Rode em conjunto 
+
 * yarn dev
+
 Para teste apenas utilize o - yarn queue e - yarn test
 
 ### Frontend
 <br>
-Frontend consiste nos seguintes serviços: cadastro de usuario, em realizar sua sessão (login),  cadastrar,visualizar,editar e excluir seus contatos, bem como seus respectivos telefones e endereços, para alteração do cadastro nescessario utilização de e-mail, cores utilizadas em tons claros para melhor vizualização do usuario combinadas com tons escuros, a aplicação é toda responsiva funcionando tanto para web como para mobile para testar utiliza o chrome f12 e selecione a aba de dispositivos móveis.
+Frontend consiste nos seguintes serviços: cadastro de usuario, em realizar sua sessão (login),  cadastrar,visualizar,editar e excluir seus contatos, bem como seus respectivos telefones e endereços, para alteração do cadastro nescessario utilização de e-mail, a utilização da arquitetura flux em conjunto com o redux e o sagas, redux para compartilhamento de estados globais na aplicação e o sagas resposavel pelas as regras de negócio e funções assincronas. cores utilizadas em tons claros para melhor vizualização do usuario combinadas com tons escuros, a aplicação é toda responsiva funcionando tanto para web como para mobile para testar utiliza o chrome f12 e selecione a aba de dispositivos móveis.
 
 #### Requisitos
 <br>
 Para iniciar o projeto você deve ter instalado e processando
+
 * NodeJs
+
 * Aplicação Backend em execução 
+
 * Yarn
 
 #### Iniciar
 <br>
 Após a instalação de todos os requisitos rode o comando dentro da pasta backend
+
 * yarn
+
 Rode o comando em um terminal de sua preferência
+
 * yarn start
