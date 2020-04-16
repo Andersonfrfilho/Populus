@@ -19,13 +19,13 @@ import validateUserUpdate from './app/validators/users/UserUpdate';
 // validates : Session
 import validateSessionStore from './app/validators/users/SessionStore';
 import validateContactStore from './app/validators/users/ContactStore';
-import validateContactUpdate from './app/validators/users/ContactUpdate';
 // validates : Users : Contact : Address
 import validateAddressStore from './app/validators/addresses/AddressesStore';
 import validateAddressUpdate from './app/validators/addresses/AddressesUpdate';
 // validates : Users : Contact : Phone
 import validatePhoneStore from './app/validators/phones/PhonesStore';
 import validatePhoneUpdate from './app/validators/phones/PhonesUpdate';
+
 const routes = new Router();
 // const bruteStore = new BruteRedis({
 //   host: process.env.REDIS_HOST,
@@ -63,7 +63,7 @@ routes.post(
   validateContactStore,
   ContactController.store
 );
-routes.get(
+routes.put(
   '/users/content/contacts/:id',
   authMiddleware,
   ContactController.update
@@ -80,35 +80,32 @@ routes.post(
   AddressController.store
 );
 routes.get(
-  '/users/content/contacts/content/addresses/:idAddress',
+  '/users/content/contacts/content/addresses/:id',
   AddressController.show
 );
 routes.put(
-  '/users/content/contacts/content/addresses/:id_address',
+  '/users/content/contacts/content/addresses/:id',
   validateAddressUpdate,
   AddressController.update
 );
 routes.delete(
-  '/users/content/contacts/content/addresses/:id_address',
+  '/users/content/contacts/content/addresses/:id',
   AddressController.destroy
 );
 // routes : contacts : phone
 routes.post(
-  '/users/content/contacts/content/phone',
+  '/users/content/contacts/content/phones',
   validatePhoneStore,
   PhoneController.store
 );
-routes.get(
-  '/users/content/contacts/content/phone/:idPhone',
-  PhoneController.show
-);
+routes.get('/users/content/contacts/content/phones/:id', PhoneController.show);
 routes.put(
-  '/users/content/contacts/content/phone/:id_phone',
+  '/users/content/contacts/content/phones/:id',
   validatePhoneUpdate,
   PhoneController.update
 );
 routes.delete(
-  '/users/content/contacts/content/phone/:id_phone',
+  '/users/content/contacts/content/phones/:id',
   PhoneController.destroy
 );
 routes.get('/notifications', NotificationController.index);

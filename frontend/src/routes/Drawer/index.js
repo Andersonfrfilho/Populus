@@ -7,7 +7,6 @@ import * as UsersActions from '../../store/modules/users/actions';
 import Header from '../../components/Header';
 import Drawer from '../../components/Drawer';
 import ContactList from '../../pages/ContactList';
-import ContactRegister from '../../pages/ContactRegister';
 import DrawerContentHeader from '../../components/DrawerContentHeader';
 import { colors, icons } from '../../styles';
 
@@ -128,13 +127,13 @@ export default function Panel(props) {
                     />
                   );
                 }
-                return suboptions.map((suboptions, indexParam) => {
+                return suboptions.map((suboption, indexParam) => {
                   return (
                     <Route
                       key={indexParam.toString()}
-                      path={suboptions.route.path}
-                      exact={suboptions.route.exact}
-                      children={() => <suboptions.route.main />}
+                      path={suboption.route.path}
+                      exact={suboption.route.exact}
+                      children={() => <suboption.route.main />}
                     />
                   );
                 });

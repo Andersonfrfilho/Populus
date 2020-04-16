@@ -18,7 +18,6 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       fk_user_id: {
         type: Sequelize.INTEGER,

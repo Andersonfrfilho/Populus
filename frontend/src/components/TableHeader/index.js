@@ -17,7 +17,6 @@ import {
   AreaIconAdd,
 } from './styles';
 import { icons } from '../../styles';
-import Loader from '../Loader';
 
 export default function TableHeader({
   title,

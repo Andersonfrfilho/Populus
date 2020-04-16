@@ -1,12 +1,13 @@
 import Contact from '../../models/Contact';
 import Address from '../../models/Address';
 import Phone from '../../models/Phone';
-import User from '../../models/User'
+import User from '../../models/User';
+
 class ContactController {
   async store(req, res) {
     const { name, lastname, email } = req.body;
-    const user = await User.findByPk(req.userId)
-    if(!user){
+    const user = await User.findByPk(req.userId);
+    if (!user) {
       return res.status(400).json({ error: 'usuario não exite' });
     }
     const newContact = {
@@ -15,10 +16,6 @@ class ContactController {
       email,
       fk_user_id: req.userId,
     };
-    const emailExist = await Contact.findOne({ where: { email:email.toLowerCase() } });
-    if (emailExist) {
-      return res.status(400).json({ error: 'email ja cadastrado' });
-    }
     const { id: idContact } = await Contact.create(newContact);
     return res.json({
       id: idContact,
@@ -48,7 +45,7 @@ class ContactController {
         {
           model: Phone,
           as: 'phones',
-          attributes: ['id', 'number','description'],
+          attributes: ['id', 'number', 'description'],
         },
       ],
     });
@@ -59,9 +56,8 @@ class ContactController {
   }
 
   async update(req, res) {
-    const { id_contact } = req.query;
-    const { email } = req.body;
-    const contact = await Contact.findByPk(id_contact);
+    const { id } = req.params;
+    const contact = await Contact.findByPk(id);
     if (!contact) {
       return res.status(400).json({ error: 'Contact not exist' });
     }
@@ -70,20 +66,13 @@ class ContactController {
         .status(401)
         .json({ error: 'User not authorizate to update contact' });
     }
-    const emailExist = await Contact.findOne({
-      where: { email: email.toLowerCase() },
-    });
-    if (emailExist) {
-      return res.status(400).json({ error: 'Email exist try other' });
-    }
-
     const contactModified = await contact.update(req.body);
     return res.json(contactModified);
   }
 
   async destroy(req, res) {
-    const { id_contact } = req.query;
-    const contact = await Contact.findByPk(id_contact);
+    const { id } = req.params;
+    const contact = await Contact.findByPk(id);
     if (!contact) {
       return res.status(400).json({ error: 'Contact not exist' });
     }
@@ -92,7 +81,7 @@ class ContactController {
         .status(401)
         .json({ error: 'User not authorizate to update contact' });
     }
-    const contactModified = await contact.delete();
+    const contactModified = await contact.destroy();
     return res.json(contactModified);
   }
 }

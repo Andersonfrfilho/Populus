@@ -30,8 +30,8 @@ class AddressController {
   }
 
   async update(req, res) {
-    const { id_phone } = req.query;
-    const phone = await Phone.findByPk(id_phone);
+    const { id } = req.params;
+    const phone = await Phone.findByPk(id);
     if (!phone) {
       return res.status(400).json({ error: 'Phone not exist' });
     }
@@ -40,8 +40,8 @@ class AddressController {
   }
 
   async destroy(req, res) {
-    const { id_phone } = req.query;
-    const phone = await Phone.findByPk(id_phone);
+    const { id } = req.params;
+    const phone = await Phone.findByPk(id);
     if (!phone) {
       return res.status(400).json({ error: 'Phone not exist' });
     }

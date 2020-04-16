@@ -10,23 +10,18 @@ import {
   AreaUserButtonExpand,
   AreaUserButon,
   DrawerOff,
-  AreaSvg,
-  Image,
   AreaPhoto,
-  Photo,
   AreaIcon,
   IconDown,
   IconUp,
   IconBack,
 } from './styles';
-import avatar from '../../assets/images/avatar.png';
 
 export default function Header({
   functionOnClickDrawer,
   openDrawer,
   functionOnClickUser,
   openUser,
-  name,
   titleDrawer,
   functionOnClickLogout,
   logoff,
@@ -68,7 +63,6 @@ export default function Header({
 }
 Header.propTypes = {
   titleDrawer: PropTypes.string,
-  name: PropTypes.string,
   functionOnClickDrawer: PropTypes.func,
   openDrawer: PropTypes.bool,
   functionOnClickUser: PropTypes.func,
@@ -78,7 +72,6 @@ Header.propTypes = {
 };
 Header.defaultProps = {
   titleDrawer: 'Menu',
-  name: 'Name',
   logoff: 'logoff',
   functionOnClickDrawer: () => {},
   functionOnClickLogout: () => {},

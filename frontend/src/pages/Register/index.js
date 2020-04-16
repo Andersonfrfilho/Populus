@@ -155,7 +155,6 @@ export default function Register() {
             disabled={false}
             typeInput={showFieldState ? 'text' : 'password'}
             button
-            disabled={loading}
             icon={() =>
               showFieldState ? (
                 <icons.EyeOpenIcon size={18} />

@@ -1,13 +1,6 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import {
-  FaBars,
-  FaPowerOff,
-  FaAngleDown,
-  FaAngleUp,
-  FaArrowLeft,
-} from 'react-icons/fa';
-import { colors, metrics } from '../../styles';
+
+import { colors } from '../../styles';
 
 export const AreaHeader = styled.header`
   display: flex;

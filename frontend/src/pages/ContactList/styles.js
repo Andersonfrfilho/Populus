@@ -1,6 +1,5 @@
-import styled, { keyframes, css } from 'styled-components';
-import { FaSistrix, FaTimes, FaPlus } from 'react-icons/fa';
-import { colors, metrics } from '../../styles';
+import styled from 'styled-components';
+import { colors } from '../../styles';
 
 export const AreaUserList = styled.div`
   margin: 0;

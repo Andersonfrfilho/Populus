@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import {
   FaSortAlphaUp,
   FaSortAlphaDown,
@@ -12,7 +12,7 @@ import {
   MdCheckBox,
   MdIndeterminateCheckBox,
 } from 'react-icons/md';
-import { colors, metrics } from '../../styles';
+import { colors } from '../../styles';
 
 export const Modal = styled.div`
   display: ${({ visible }) =>

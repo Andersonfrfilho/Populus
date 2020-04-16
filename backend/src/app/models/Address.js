@@ -17,14 +17,13 @@ class Address extends Model {
         sequelize,
       }
     );
-    this.addHook('beforeCreate', async address => {
-      address.number = address.number.toLowerCase();
-      address.address = address.address.toLowerCase();
-      address.neighborhood = address.neighborhood.toLowerCase();
-      address.city = address.city.toLowerCase();
-      address.state = address.state.toLowerCase();
-      address.country = address.country.toLowerCase();
-    });
+    // this.addHook('beforeCreate', async address => {
+    //   address.address = address.address.toLowerCase();
+    //   address.neighborhood = address.neighborhood.toLowerCase();
+    //   address.city = address.city.toLowerCase();
+    //   address.state = address.state.toLowerCase();
+    //   address.country = address.country.toLowerCase();
+    // });
     return this;
   }
 

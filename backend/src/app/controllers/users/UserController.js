@@ -40,6 +40,10 @@ class UserController {
           model: Contact,
           as: 'contacts',
           attributes: ['id', 'name', 'lastname', 'email'],
+          order: [
+            ['id', 'DESC'],
+            ['name', 'ASC'],
+          ],
           include: [
             {
               model: Address,
@@ -69,8 +73,10 @@ class UserController {
   }
 
   async show(req, res) {
+    const { order = ['contacts', 'name', 'asc'] } = req.query;
     const userEspecified = await User.findByPk(req.userId, {
       attributes: ['id', 'name', 'phone', 'email'],
+      order: [order],
       include: [
         {
           model: Contact,
@@ -94,7 +100,7 @@ class UserController {
             {
               model: Phone,
               as: 'phones',
-              attributes: ['id', 'number'],
+              attributes: ['id', 'number', 'description'],
             },
           ],
         },

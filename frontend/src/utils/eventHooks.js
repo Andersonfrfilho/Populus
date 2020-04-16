@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 // use hooks
 // useEventListener('focusout', functionOnEndingChange);
 export default function useEventListener(eventName, handler, element = window) {

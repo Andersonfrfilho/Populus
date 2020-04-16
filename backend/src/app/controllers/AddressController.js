@@ -11,7 +11,7 @@ class AddressController {
       country,
       state,
       zipcode,
-      contact_id,
+      fk_contact_id,
     } = req.body;
     const newAddress = {
       address,
@@ -21,9 +21,9 @@ class AddressController {
       country,
       state,
       zipcode,
-      fk_contact_id: contact_id,
+      fk_contact_id,
     };
-    const contactExist = await Contact.findByPk(contact_id);
+    const contactExist = await Contact.findByPk(fk_contact_id);
     if (!contactExist) {
       return res.status(400).json({ error: 'Contact not find' });
     }
@@ -35,9 +35,7 @@ class AddressController {
   }
 
   async show(req, res) {
-    const {
-      idAddress,
-    } = req.query;
+    const { idAddress } = req.query;
     const showAddresses = await Address.findByPk(idAddress, {
       attributes: [
         'id',
@@ -57,8 +55,8 @@ class AddressController {
   }
 
   async update(req, res) {
-    const { id_address } = req.query;
-    const address = await Address.findByPk(id_address);
+    const { id } = req.params;
+    const address = await Address.findByPk(id);
     if (!address) {
       return res.status(400).json({ error: 'Address not exist' });
     }
@@ -67,8 +65,8 @@ class AddressController {
   }
 
   async destroy(req, res) {
-    const { id_address } = req.query;
-    const address = await Address.findByPk(id_address);
+    const { id } = req.params;
+    const address = await Address.findByPk(id);
     if (!address) {
       return res.status(400).json({ error: 'Contact not exist' });
     }
