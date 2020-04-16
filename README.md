@@ -104,3 +104,11 @@ Após a instalação de todos os requisitos rode o comando dentro da pasta backe
 Rode o comando em um terminal de sua preferência
 
 * yarn start
+
+## Resultado
+<br>
+<img src="./docs/image1.gif"/>
+<br>
+<br>
+<img src="./docs/image2.gif"/>
+<br>
