@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  AreaPanel,
-  AreaDrawerPanel,
-  AreaDrawer,
-  AreaContent,
-  IconUserList,
-  IconRegisterUser,
-} from './styles';
+import { AreaPanel, AreaDrawerPanel, AreaDrawer, AreaContent } from './styles';
 
-import * as ContactsActions from '../../store/modules/contacts/actions';
 import * as UsersActions from '../../store/modules/users/actions';
 import Header from '../../components/Header';
 import Drawer from '../../components/Drawer';
@@ -44,32 +36,6 @@ export default function Panel(props) {
         },
         suboptions: [],
       },
-      {
-        id: '2',
-        name: 'Registro',
-        open: false,
-        link: '/register',
-        icon: () => <icons.UserPlusIcon color={colors.dark} />,
-        route: {
-          path: `${path}/register`,
-          exact: false,
-          main: () => <ContactRegister />,
-        },
-        suboptions: [],
-      },
-      // {
-      //   id: '2',
-      //   name: 'Cadastro de usuários',
-      //   open: false,
-      //   link: `/registerUser`,
-      //   icon: () => <IconRegisterUser />,
-      //   route: {
-      //     path: `${path}/registerUser`,
-      //     exact: false,
-      //     main: () => <ContactRegistration />,
-      //   },
-      //   suboptions: [],
-      // },
     ],
   });
   const [drawerFind, setDrawerFind] = useState(drawer);
@@ -143,7 +109,7 @@ export default function Panel(props) {
               palceholderSearch="Pesquisar:"
               valueSearch={searchText}
               functionOnChangeTextSearch={text => setSearchText(text)}
-              functionOnClickLink={name => functionClickLink(name)}
+              functionOnClickLink={nameParam => functionClickLink(nameParam)}
             />
           </AreaDrawer>
 

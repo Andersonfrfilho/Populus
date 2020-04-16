@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Container,
@@ -14,7 +14,6 @@ import * as UsersActions from '../../store/modules/users/actions';
 import Logo from '../../components/Logo';
 import InputIcon from '../../components/InputIcon';
 import Button from '../../components/ButtonIcon';
-import Loader from '../../components/Loader';
 import { icons } from '../../styles';
 
 export default function Register() {

@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   AreaDrawer,
   AreaHeader,
   AreaPhoto,
-  Photo,
   AreaInfo,
   Title,
   Text,
@@ -146,8 +144,10 @@ Drawer.propTypes = {
   functionOnChangeTextSearch: PropTypes.func,
   functionOnClickOpenSuboption: PropTypes.func,
   functionOnClickLink: PropTypes.func,
+  path: PropTypes.string,
 };
 Drawer.defaultProps = {
+  path: '',
   openDrawer: false,
   name: 'Empresa',
   subname: 'subname',

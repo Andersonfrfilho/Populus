@@ -85,3 +85,35 @@ export function requestSelectAllContacts(id, select, contacts) {
     },
   };
 }
+export function alterContact(contact) {
+  return {
+    type: '@contacts/REQUEST_EDIT_CONTACTS',
+    payload: {
+      contact,
+    },
+  };
+}
+export function requestDeleteDirect(id) {
+  return {
+    type: '@contacts/REQUEST_DELETE_DIRECT',
+    payload: {
+      id,
+    },
+  };
+}
+export function requestDeleteSelects(contacts) {
+  return {
+    type: '@contacts/REQUEST_DELETE_SELECTS',
+    payload: {
+      contacts,
+    },
+  };
+}
+export function requestContactsOrderName(order) {
+  return {
+    type: '@contacts/REQUEST_CONTACTS_ORDER_NAME',
+    payload: {
+      order,
+    },
+  };
+}

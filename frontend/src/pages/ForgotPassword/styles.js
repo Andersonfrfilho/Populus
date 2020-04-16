@@ -1,5 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
-import { FaUserAlt } from 'react-icons/fa';
+import styled from 'styled-components';
 import { colors, metrics } from '../../styles';
 
 export const Container = styled.div`

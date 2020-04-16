@@ -157,7 +157,7 @@ export default function ModalRegister({
   disabledButtonSave,
   iconButtonSave,
 }) {
-  console.tron.log(infoUser);
+  console.tron.log(infoUser.addresses);
   return (
     <AreaModal>
       <AreaHeader>
@@ -295,11 +295,11 @@ export default function ModalRegister({
                 </AreaInputTitle>
                 <AreaInputRemove>
                   <AreaTitleInput />
-                  {index === 0 ? null : (
-                    <AreaIconRemove onClick={functionOnClickRemovePhone}>
-                      <icons.ClosedTimesIcon color={colors.dark} />
-                    </AreaIconRemove>
-                  )}
+                  <AreaIconRemove
+                    onClick={() => functionOnClickRemovePhone(index)}
+                  >
+                    <icons.ClosedTimesIcon color={colors.dark} />
+                  </AreaIconRemove>
                 </AreaInputRemove>
               </AreaInputs>
 
@@ -313,7 +313,7 @@ export default function ModalRegister({
       <AreaInputsMultiples>
         <AreaTitleInputsMultiples>
           <TitleInputsMultiple>
-            {arrayAddresses.length > 1
+            {infoUser.addresses.length > 1
               ? `${areaInputAddressesTitle}s`
               : `${areaInputAddressesTitle}`}
           </TitleInputsMultiple>
@@ -330,7 +330,7 @@ export default function ModalRegister({
           <Loader />
         ) : (
           <>
-            {arrayAddresses.map((address, index) => {
+            {infoUser.addresses.map((address, index) => {
               return (
                 <>
                   <AreaInputs>
@@ -358,13 +358,12 @@ export default function ModalRegister({
                     </AreaInputTitle>
                     <AreaInputTitle flexPosition>
                       <AreaTitleInput />
-                      {index === 0 ? null : (
-                        <AreaIconRemoveAddress
-                          onClick={functionOnClickRemoveAddresses}
-                        >
-                          <icons.ClosedTimesIcon color={colors.dark} />
-                        </AreaIconRemoveAddress>
-                      )}
+
+                      <AreaIconRemoveAddress
+                        onClick={() => functionOnClickRemoveAddresses(index)}
+                      >
+                        <icons.ClosedTimesIcon color={colors.dark} />
+                      </AreaIconRemoveAddress>
                     </AreaInputTitle>
                   </AreaInputs>
 
@@ -385,8 +384,7 @@ export default function ModalRegister({
                         functionOnEndingChange={
                           functionOnEndingChangeAddressesName
                         }
-                        value={address.addressValue}
-                        error={address.addressError}
+                        value={address.address}
                         iconExist={false}
                       />
                     </AreaInputTitle>
@@ -406,8 +404,7 @@ export default function ModalRegister({
                         functionOnEndingChange={
                           functionOnEndingChangeAddressesNumber
                         }
-                        value={address.numberValue}
-                        error={false}
+                        value={address.number}
                         iconExist={false}
                       />
                     </AreaInputTitle>
@@ -435,7 +432,7 @@ export default function ModalRegister({
                         functionOnEndingChange={
                           functionOnEndingChangeAddressesNeighborhood
                         }
-                        value={address.neighborhoodValue}
+                        value={address.neighborhood}
                         error={false}
                         iconExist={false}
                       />
@@ -455,8 +452,7 @@ export default function ModalRegister({
                         functionOnEndingChange={
                           functionOnEndingChangeAddressesCity
                         }
-                        value={address.cityValue}
-                        error={false}
+                        value={address.city}
                         iconExist={false}
                       />
                     </AreaInputTitle>
@@ -478,7 +474,7 @@ export default function ModalRegister({
                         functionOnEndingChange={
                           functionOnEndingChangeAddressesState
                         }
-                        value={address.stateValue}
+                        value={address.state}
                         error={false}
                         iconExist={false}
                       />
@@ -498,7 +494,7 @@ export default function ModalRegister({
                         functionOnEndingChange={
                           functionOnEndingChangeAddressesCountry
                         }
-                        value={address.countryValue}
+                        value={address.country}
                         error={false}
                         iconExist={false}
                       />

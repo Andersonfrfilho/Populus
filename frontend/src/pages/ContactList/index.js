@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import {
-  AreaUserList,
-  AreaHeaderTable,
-  AreaBodyTable,
-  AreaIconAdd,
-} from './styles';
+import { AreaUserList, AreaHeaderTable, AreaBodyTable } from './styles';
 import { verifyEmail, verifyName, verifyPhone } from '../../utils';
 import TableHeader from '../../components/TableHeader';
 import TableBody from '../../components/TableBody';
@@ -16,11 +11,10 @@ import Loader from '../../components/Loader';
 import { icons } from '../../styles';
 
 function ContactList() {
-  const { loading, error, message } = useSelector(state => state.commons);
+  const { loading } = useSelector(state => state.commons);
   const {
     contacts,
     names,
-    address,
     loadingLocal,
     addressName,
     neighborhood,
@@ -28,7 +22,7 @@ function ContactList() {
     state,
     index,
     modalState,
-  } = useSelector(state => state.contacts);
+  } = useSelector(stateParam => stateParam.contacts);
   const dispatch = useDispatch();
 
   const [inputNameValue, setInputNameValue] = useState('');
@@ -37,6 +31,7 @@ function ContactList() {
   const [inputLastnameError, setInputLastnameError] = useState(null);
   const [inputEmailValue, setInputEmailValue] = useState('');
   const [inputEmailError, setInputEmailError] = useState(null);
+  const [orderList, setOrderList] = useState(true);
   const [userSelect, setUserSelect] = useState({
     id: 0,
     name: '',
@@ -95,9 +90,11 @@ function ContactList() {
     setAddressesProperties(newArray);
   }, [addressName, neighborhood, city, state, index]);//eslint-disable-line
   useEffect(() => {
-    if (visibleModal) {
+    if (visibleModal || visibleModalTwo) {
+      console.tron.log('entrou no closed modal');
       setVisibleModal(false);
       closedModal();
+      closedModalTwoOpen();
     }
   }, [modalState]);//eslint-disable-line
 
@@ -118,7 +115,7 @@ function ContactList() {
     const errorResult = verifyName(nameParam);
     setInputLastnameError(errorResult);
   }
-  function verifyMailFunction(mailParam, messageParam = '') {
+  function verifyMailFunction(mailParam) {
     const errorResult = verifyEmail(mailParam);
     setInputEmailError(errorResult);
   }
@@ -465,6 +462,18 @@ function ContactList() {
     setVisibleModal(true);
   }
   function openModalTwoOpen(indexParam, contactsParam) {
+    const newAddressse = contactsParam[indexParam].addresses.map(
+      addressParam => ({
+        ...addressParam,
+        newAddress: false,
+        modified: false,
+      })
+    );
+    const newPhones = contactsParam[indexParam].phones.map(phone => ({
+      ...phone,
+      newPhone: false,
+      modified: false,
+    }));
     const newUser = {
       ...contactsParam[indexParam],
       nameEditable: true,
@@ -473,6 +482,10 @@ function ContactList() {
       nameError: null,
       emailError: null,
       lastnameError: null,
+      addresses: newAddressse,
+      phones: newPhones,
+      addressesExclud: [],
+      phonesExclud: [],
     };
     setUserSelect(newUser);
     setVisibleModalTwo(true);
@@ -548,6 +561,7 @@ function ContactList() {
       numberError: false,
       descriptionError: false,
       newPhone: true,
+      modified: false,
     });
     const newUser = {
       ...contactParam,
@@ -555,11 +569,17 @@ function ContactList() {
     };
     setUserSelect(newUser);
   }
-  function functionEditorRemovePhone(contactParam) {
-    const arrayPhone = contactParam.phones.slice(-1);
+  function functionEditorRemovePhone(indexParam, contactParam) {
+    const arrayPhones = contactParam.phones.filter(
+      (address, indexPhone) => indexParam !== indexPhone
+    );
     const newUser = {
       ...contactParam,
-      phones: arrayPhone,
+      phones: arrayPhones,
+      phonesExclud: [
+        ...contactParam.phonesExclud,
+        contactParam.phones[indexParam].id,
+      ],
     };
     setUserSelect(newUser);
   }
@@ -569,6 +589,24 @@ function ContactList() {
         return {
           ...phone,
           number: value,
+          modified: true,
+        };
+      }
+      return phone;
+    });
+    const newUser = {
+      ...contactParam,
+      phones: [...newPhones],
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangePhoneDescription(value, indexParam, contactParam) {
+    const newPhones = contactParam.phones.map((phone, indexPhone) => {
+      if (indexParam === indexPhone) {
+        return {
+          ...phone,
+          description: value,
+          modified: true,
         };
       }
       return phone;
@@ -580,7 +618,7 @@ function ContactList() {
     setUserSelect(newUser);
   }
   function functionEditorAddAddresses(contactParam) {
-    const arrayAddress = [...contactParam.address];
+    const arrayAddress = [...contactParam.addresses];
     arrayAddress.push({
       numberValue: '',
       numberError: false,
@@ -596,6 +634,8 @@ function ContactList() {
       countryError: false,
       zipcodeValue: '',
       zipcodeError: false,
+      newAddress: true,
+      modified: false,
     });
     const newUser = {
       ...contactParam,
@@ -603,13 +643,175 @@ function ContactList() {
     };
     setUserSelect(newUser);
   }
-  function functionEditorRemoveAddresses(contactParam) {
-    const arrayAddress = contactParam.address.slice(-1);
+  function functionEditorRemoveAddresses(indexParam, contactParam) {
+    console.tron.log(
+      indexParam,
+      contactParam,
+      contactParam.addressesExclud,
+      contactParam.addresses[indexParam].id
+    );
+    const arrayAddress = contactParam.addresses.filter(
+      (address, indexAddress) => indexParam !== indexAddress
+    );
     const newUser = {
       ...contactParam,
       addresses: arrayAddress,
+      addressesExclud: [
+        ...contactParam.addressesExclud,
+        contactParam.addresses[indexParam].id,
+      ],
     };
     setUserSelect(newUser);
+  }
+  function functionChangeAddressesZipCode(value, indexParam, contactParam) {
+    const newAddresses = contactParam.addresses.map(
+      (addressParam, indexPhone) => {
+        if (indexParam === indexPhone) {
+          return {
+            ...addressParam,
+            zipcode: value,
+            modified: true,
+          };
+        }
+        return addressParam;
+      }
+    );
+    const newUser = {
+      ...contactParam,
+      addresses: [...newAddresses],
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeAddressesNumber(value, indexParam, contactParam) {
+    const newAddresses = contactParam.addresses.map(
+      (addressParam, indexPhone) => {
+        if (indexParam === indexPhone) {
+          return {
+            ...addressParam,
+            number: value,
+            modified: true,
+          };
+        }
+        return addressParam;
+      }
+    );
+    const newUser = {
+      ...contactParam,
+      addresses: [...newAddresses],
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeAddressesAddress(value, indexParam, contactParam) {
+    const newAddresses = contactParam.addresses.map(
+      (addressParam, indexPhone) => {
+        if (indexParam === indexPhone) {
+          return {
+            ...addressParam,
+            address: value,
+            modified: true,
+          };
+        }
+        return addressParam;
+      }
+    );
+    const newUser = {
+      ...contactParam,
+      addresses: [...newAddresses],
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeAddressesNeighborhood(
+    value,
+    indexParam,
+    contactParam
+  ) {
+    const newAddresses = contactParam.addresses.map(
+      (addressParam, indexPhone) => {
+        if (indexParam === indexPhone) {
+          return {
+            ...addressParam,
+            neighborhood: value,
+            modified: true,
+          };
+        }
+        return addressParam;
+      }
+    );
+    const newUser = {
+      ...contactParam,
+      addresses: [...newAddresses],
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeAddressesCity(value, indexParam, contactParam) {
+    const newAddresses = contactParam.addresses.map(
+      (addressParam, indexPhone) => {
+        if (indexParam === indexPhone) {
+          return {
+            ...addressParam,
+            city: value,
+            modified: true,
+          };
+        }
+        return addressParam;
+      }
+    );
+    const newUser = {
+      ...contactParam,
+      addresses: [...newAddresses],
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeAddressesState(value, indexParam, contactParam) {
+    const newAddresses = contactParam.addresses.map(
+      (addressParam, indexPhone) => {
+        if (indexParam === indexPhone) {
+          return {
+            ...addressParam,
+            state: value,
+            modified: true,
+          };
+        }
+        return addressParam;
+      }
+    );
+    const newUser = {
+      ...contactParam,
+      addresses: [...newAddresses],
+    };
+    setUserSelect(newUser);
+  }
+  function functionChangeAddressesCountry(value, indexParam, contactParam) {
+    const newAddresses = contactParam.addresses.map(
+      (addressParam, indexPhone) => {
+        if (indexParam === indexPhone) {
+          return {
+            ...addressParam,
+            country: value,
+            modified: true,
+          };
+        }
+        return addressParam;
+      }
+    );
+    const newUser = {
+      ...contactParam,
+      addresses: [...newAddresses],
+    };
+    setUserSelect(newUser);
+  }
+  function functionAlterUser(contactParam) {
+    dispatch(ContactsActions.alterContact(contactParam));
+  }
+  function functionRequestDeleteDirect(idParam) {
+    dispatch(ContactsActions.requestDeleteDirect(idParam));
+  }
+  function functionRequestDeleteSelects(contactsParam) {
+    dispatch(ContactsActions.requestDeleteSelects(contactsParam));
+  }
+  function functionRequestOrderList(orderParam) {
+    setOrderList(!orderParam);
+    dispatch(ContactsActions.requestContactsOrderName(orderParam));
   }
   return (
     <AreaUserList>
@@ -829,9 +1031,12 @@ function ContactList() {
       <AreaBodyTable>
         <TableBody
           infoTable={contacts}
+          functionOrderOption={() => functionRequestOrderList(orderList)}
           functionSelect={(idParam, selectParam) =>
             selectContact(idParam, selectParam, contacts)
           }
+          functionDeleteSelect={() => functionRequestDeleteSelects(contacts)}
+          functionDeleteDirect={idParam => functionRequestDeleteDirect(idParam)}
           functionViewRow={indexParam => openModalTwoOpen(indexParam, contacts)}
           // modal
           visibleModal={visibleModalTwo}
@@ -871,8 +1076,8 @@ function ContactList() {
           functionOnClickAddPhoneModal={() => {
             functionEditorAddPhone(userSelect);
           }}
-          functionOnClickRemovePhoneModal={() => {
-            functionEditorRemovePhone(userSelect);
+          functionOnClickRemovePhoneModal={indexParam => {
+            functionEditorRemovePhone(indexParam, userSelect);
           }}
           // modal : input : phone : number
           functionOnChangeInputPhoneNumberModal={(text, indexParam) =>
@@ -881,13 +1086,52 @@ function ContactList() {
           functionOnEndingChangePhoneNumberModal={() =>
             verifyPhoneNumber(userSelect.phones)
           }
+          functionOnChangeInputPhoneDescriptionModal={(text, indexParam) =>
+            functionChangePhoneDescription(text, indexParam, userSelect)
+          }
+          functionOnEndingChangePhoneDescriptionModal={() =>
+            verifyPhoneDescription(userSelect.phones)
+          }
           // modal : input : phone : add
           functionOnClickAddAddressesModal={() => {
             functionEditorAddAddresses(userSelect);
           }}
-          functionOnClickRemoveAddressesModal={() => {
-            functionEditorRemoveAddresses(userSelect);
+          functionOnClickRemoveAddressesModal={indexParam => {
+            functionEditorRemoveAddresses(indexParam, userSelect);
           }}
+          // modal : input : address : zipcode
+          functionOnChangeInputAddressesZipCodeModal={(text, indexParam) =>
+            functionChangeAddressesZipCode(text, indexParam, userSelect)
+          }
+          // modal : input : address : number
+          functionOnChangeInputAddressesNumberModal={(text, indexParam) =>
+            functionChangeAddressesNumber(text, indexParam, userSelect)
+          }
+          // modal : input : address : zipcode
+          functionOnChangeInputAddressesNameModal={(text, indexParam) =>
+            functionChangeAddressesAddress(text, indexParam, userSelect)
+          }
+          // modal : input : address : zipcode
+          functionOnChangeInputAddressesNeighborhoodModal={(text, indexParam) =>
+            functionChangeAddressesNeighborhood(text, indexParam, userSelect)
+          }
+          // modal : input : address : zipcode
+          functionOnChangeInputAddressesCityModal={(text, indexParam) =>
+            functionChangeAddressesCity(text, indexParam, userSelect)
+          }
+          // modal : input : address : zipcode
+          functionOnChangeInputAddressesStateModal={(text, indexParam) =>
+            functionChangeAddressesState(text, indexParam, userSelect)
+          }
+          // modal : input : address : zipcode
+          functionOnChangeInputAddressesCountryModal={(text, indexParam) =>
+            functionChangeAddressesCountry(text, indexParam, userSelect)
+          }
+          titleButtonSave="Alterar"
+          functionOnClickButtonSave={() => functionAlterUser(userSelect)}
+          disabledButtonSave={loading}
+          iconButtonSave={() => <icons.IconUserEdit />}
+          order={orderList}
         />
       </AreaBodyTable>
     </AreaUserList>

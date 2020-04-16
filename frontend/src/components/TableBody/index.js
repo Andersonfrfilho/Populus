@@ -9,7 +9,6 @@ import {
   AreaIcons,
   AreaInfo,
   Info,
-  IconEdit,
   IconDelete,
   IconSquareAllSelect,
   IconSquareUnselect,
@@ -35,6 +34,7 @@ export default function TableBody({
   functionSelect,
   functionClosedModal,
   functionDeleteSelect,
+  functionDeleteDirect,
   functionOrderOption,
   functionViewRow,
   visibleModal,
@@ -60,39 +60,44 @@ export default function TableBody({
   // Modal Function Change : phone : description
   functionOnChangeInputPhoneDescriptionModal,
   functionOnEndingChangePhoneDescriptionModal,
-  functionOnEditChangeInputPhoneDescriptionModal,
+  // Modal Function Change : address : add / Remove
+  functionOnClickAddAddressesModal,
+  functionOnClickRemoveAddressesModal,
+  //= ==============
+  // Modal Function Change name
+  functionOnChangeInputAddressesNameModal,
+  functionOnEndingChangeAddressesNameModal,
+  // Modal Functio Change Number
+  functionOnChangeInputAddressesNumberModal,
+  functionOnEndingChangeAddressesNumberModal,
   // Modal Function Change
-  functionOnChangeInputNumberModal,
-  functionOnEndingChangeNumberModal,
-  functionOnEditChangeInputNumberModal,
+  functionOnChangeInputAddressesNeighborhoodModal,
+  functionOnEndingChangeAddressesNeighborhoodModal,
   // Modal Function Change
-  functionOnChangeInputNeighborhoodModal,
-  functionOnEndingChangeNeighborhoodModal,
-  functionOnEditChangeInputNeighborhoodModal,
+  functionOnChangeInputAddressesCityModal,
+  functionOnEndingChangeAddressesCityModal,
   // Modal Function Change
-  functionOnChangeInputCityModal,
-  functionOnEndingChangeCityModal,
-  functionOnEditChangeInputCityModal,
+  functionOnChangeInputAddressesStateModal,
+  functionOnEndingChangeAddressesStateModal,
   // Modal Function Change
-  functionOnChangeInputStateModal,
-  functionOnEndingChangeStateModal,
-  functionOnEditChangeInputStateModal,
+  functionOnChangeInputAddressesCountryModal,
+  functionOnEndingChangeAddressesCountryModal,
   // Modal Function Change
-  functionOnChangeInputCountryModal,
-  functionOnEndingChangeCountryModal,
-  functionOnEditChangeInputCountryModal,
-  // Modal Function Change
-  functionOnChangeInputZipCodeModal,
-  functionOnEndingChangeZipCodeModal,
-  functionOnEditChangeInputZipCodeModal,
+  functionOnChangeInputAddressesZipCodeModal,
+  functionOnEndingChangeAddressesZipCodeModal,
+  // last-functions
+  titleButtonSave,
+  functionOnClickButtonSave,
+  disabledButtonSave,
+  iconButtonSave,
+  order,
 }) {
-  console.tron.log(infoTable);
   return (
     <AreaTable>
       <Modal visible={visibleModal}>
         <ModalAlter
           infoUser={contact}
-          titleHeader="Usuário"
+          titleHeader="Alterar usuário"
           functionOnClick={functionClosedModal}
           functionOnClickAddPhone={functionOnClickAddPhoneModal}
           functionOnClickRemovePhone={functionOnClickRemovePhoneModal}
@@ -146,7 +151,7 @@ export default function TableBody({
           // field :description
           // fields
           titleInputPhoneDescription="Descrição"
-          typeInputPhoneDescription="mask"
+          typeInputPhoneDescription="text"
           typeInputPhoneDescriptionFormat="text"
           placeholderInputPhoneDescription="Digite a descrição:"
           iconInputPhoneDescription={() => <icons.UserListIcon />}
@@ -227,10 +232,10 @@ export default function TableBody({
             functionOnEndingChangeAddressesCountryModal
           }
           // button save
-          // titleButtonSave={titleButtonModal}
-          // functionOnClickButtonSave={functionOnClickButtonSaveModal}
-          // disabledButtonSave={disabledButtonSaveModal}
-          // iconButtonSave={iconButtonSaveModal}
+          titleButtonSave={titleButtonSave}
+          functionOnClickButtonSave={functionOnClickButtonSave}
+          disabledButtonSave={disabledButtonSave}
+          iconButtonSave={iconButtonSave}
         />
       </Modal>
       <Row key="index">
@@ -247,7 +252,7 @@ export default function TableBody({
           </AreaInfo>
           <AreaIcons>
             {infoTable[0].options[0].select ? (
-              <IconDelete onClick={() => functionDeleteSelect(0)} />
+              <IconDelete onClick={functionDeleteSelect} />
             ) : null}
           </AreaIcons>
         </Column>
@@ -256,12 +261,12 @@ export default function TableBody({
             <AreaInfo
               align={option.align}
               pointer
-              onClick={() => functionOrderOption(option.name)}
+              onClick={functionOrderOption}
             >
               <Info>{option.name}</Info>
               {option.type === 'number'
                 ? functionSelectFilterNumber(option.select)
-                : functionSelectFilterAlpha(option.select)}
+                : functionSelectFilterAlpha(order)}
             </AreaInfo>
           </Column>
         ))}
@@ -270,10 +275,7 @@ export default function TableBody({
         if (index !== 0) {
           const { name, lastname } = element;
           return (
-            <RowBody
-              key={index.toString()}
-              onClick={() => functionViewRow(index)}
-            >
+            <RowBody key={index.toString()}>
               <ColumnBody flex={1} select={element.select}>
                 <AreaActionsIcons>
                   <AreaIcons>
@@ -287,15 +289,19 @@ export default function TableBody({
                       />
                     )}
                   </AreaIcons>
+                  <AreaIcons />
                   <AreaIcons>
-                    <IconEdit />
-                  </AreaIcons>
-                  <AreaIcons>
-                    <IconDelete onClick={() => functionDeleteSelect(0)} />
+                    <IconDelete
+                      onClick={() => functionDeleteDirect(element.id)}
+                    />
                   </AreaIcons>
                 </AreaActionsIcons>
               </ColumnBody>
-              <ColumnBody flex={3} select={element.select}>
+              <ColumnBody
+                flex={3}
+                select={element.select}
+                onClick={() => functionViewRow(index)}
+              >
                 <AreaTable>
                   <Info>{`${name.charAt(0).toUpperCase() +
                     name.slice(1)} ${lastname.charAt(0).toUpperCase() +
@@ -317,10 +323,60 @@ TableBody.propTypes = {
   functionOrderOption: PropTypes.func,
   functionViewRow: PropTypes.func,
   functionClosedModal: PropTypes.func,
+  order: PropTypes.bool,
   visibleModal: PropTypes.bool,
   contact: PropTypes.objectOf(PropTypes.any),
   functionOnChangeInputNameModal: PropTypes.func,
   functionOnEndingChangeNameModal: PropTypes.func,
+  functionOnClickAddPhoneModal: PropTypes.func,
+  functionOnClickRemovePhoneModal: PropTypes.func,
+  // Modal Function Change : name
+  functionOnEditChangeInputNameModal: PropTypes.func,
+  // Modal Function Change : lastname
+  functionOnChangeInputLastnameModal: PropTypes.func,
+  functionOnEndingChangeLastnameModal: PropTypes.func,
+  functionOnEditChangeInputLastnameModal: PropTypes.func,
+  // Modal Function Change : e-mail
+  functionOnChangeInputEmailModal: PropTypes.func,
+  functionOnEndingChangeEmailModal: PropTypes.func,
+  functionOnEditChangeInputEmailModal: PropTypes.func,
+  // Modal Function Change : phone : number
+  functionOnChangeInputPhoneNumberModal: PropTypes.func,
+  functionOnEndingChangePhoneNumberModal: PropTypes.func,
+  functionOnEditChangeInputPhoneNumberModal: PropTypes.func,
+  // Modal Function Change : phone : description
+  functionOnChangeInputPhoneDescriptionModal: PropTypes.func,
+  functionOnEndingChangePhoneDescriptionModal: PropTypes.func,
+  // Modal Function Change : address : add / Remove
+  functionOnClickAddAddressesModal: PropTypes.func,
+  functionOnClickRemoveAddressesModal: PropTypes.func,
+  //= ==============
+  // Modal Function Change name
+  functionOnChangeInputAddressesNameModal: PropTypes.func,
+  functionOnEndingChangeAddressesNameModal: PropTypes.func,
+  // Modal Functio Change Number
+  functionOnChangeInputAddressesNumberModal: PropTypes.func,
+  functionOnEndingChangeAddressesNumberModal: PropTypes.func,
+  // Modal Function Change
+  functionOnChangeInputAddressesNeighborhoodModal: PropTypes.func,
+  functionOnEndingChangeAddressesNeighborhoodModal: PropTypes.func,
+  // Modal Function Change
+  functionOnChangeInputAddressesCityModal: PropTypes.func,
+  functionOnEndingChangeAddressesCityModal: PropTypes.func,
+  // Modal Function Change
+  functionOnChangeInputAddressesStateModal: PropTypes.func,
+  functionOnEndingChangeAddressesStateModal: PropTypes.func,
+  // Modal Function Change
+  functionOnChangeInputAddressesCountryModal: PropTypes.func,
+  functionOnEndingChangeAddressesCountryModal: PropTypes.func,
+  // Modal Function Change
+  functionOnChangeInputAddressesZipCodeModal: PropTypes.func,
+  functionOnEndingChangeAddressesZipCodeModal: PropTypes.func,
+  titleButtonSave: PropTypes.string,
+  functionOnClickButtonSave: PropTypes.func,
+  disabledButtonSave: PropTypes.bool,
+  iconButtonSave: PropTypes.func,
+  functionDeleteDirect: PropTypes.func,
 };
 TableBody.defaultProps = {
   infoTable: [
@@ -347,10 +403,61 @@ TableBody.defaultProps = {
   functionSelect: () => {},
   functionClosedModal: () => {},
   functionDeleteSelect: () => {},
+  functionDeleteDirect: () => {},
   functionOrderOption: () => {},
   functionViewRow: () => {},
   visibleModal: false,
+  order: true,
   contact: {},
   functionOnChangeInputNameModal: () => {},
   functionOnEndingChangeNameModal: () => {},
+  functionOnClickAddPhoneModal: () => {},
+  functionOnClickRemovePhoneModal: () => {},
+
+  functionOnEditChangeInputNameModal: () => {},
+  // Modal Function Change : lastname
+  functionOnChangeInputLastnameModal: () => {},
+  functionOnEndingChangeLastnameModal: () => {},
+  functionOnEditChangeInputLastnameModal: () => {},
+  // Modal Function Change : e-mail
+  functionOnChangeInputEmailModal: () => {},
+  functionOnEndingChangeEmailModal: () => {},
+  functionOnEditChangeInputEmailModal: () => {},
+  // Modal Function Change : phone : number
+  functionOnChangeInputPhoneNumberModal: () => {},
+  functionOnEndingChangePhoneNumberModal: () => {},
+  functionOnEditChangeInputPhoneNumberModal: () => {},
+  // Modal Function Change : phone : description
+  functionOnChangeInputPhoneDescriptionModal: () => {},
+  functionOnEndingChangePhoneDescriptionModal: () => {},
+  // Modal Function Change : address : add / Remove
+  functionOnClickAddAddressesModal: () => {},
+  functionOnClickRemoveAddressesModal: () => {},
+  //= ==============
+  // Modal Function Change name
+  functionOnChangeInputAddressesNameModal: () => {},
+  functionOnEndingChangeAddressesNameModal: () => {},
+  // Modal Functio Change Number
+  functionOnChangeInputAddressesNumberModal: () => {},
+  functionOnEndingChangeAddressesNumberModal: () => {},
+  // Modal Function Change
+  functionOnChangeInputAddressesNeighborhoodModal: () => {},
+  functionOnEndingChangeAddressesNeighborhoodModal: () => {},
+  // Modal Function Change
+  functionOnChangeInputAddressesCityModal: () => {},
+  functionOnEndingChangeAddressesCityModal: () => {},
+  // Modal Function Change
+  functionOnChangeInputAddressesStateModal: () => {},
+  functionOnEndingChangeAddressesStateModal: () => {},
+  // Modal Function Change
+  functionOnChangeInputAddressesCountryModal: () => {},
+  functionOnEndingChangeAddressesCountryModal: () => {},
+  // Modal Function Change
+  functionOnChangeInputAddressesZipCodeModal: () => {},
+  functionOnEndingChangeAddressesZipCodeModal: () => {},
+  //= =======
+  titleButtonSave: '',
+  functionOnClickButtonSave: () => {},
+  disabledButtonSave: false,
+  iconButtonSave: () => {},
 };

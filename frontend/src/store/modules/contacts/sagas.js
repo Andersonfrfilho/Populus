@@ -92,7 +92,6 @@ function* requestFindZipCode({ payload: { index, zipcode } }) {
     if (erro) {
       throw new NewException('erro cep', 'cep não encontrado.');
     }
-    console.tron.log(addressName, neighborhood, city, state, index);
     yield put(
       defineAddress(addressName, neighborhood, city, state, index, false)
     );
@@ -206,6 +205,142 @@ function* requestSaveContact({
     yield put(failureAction(message));
   }
 }
+
+function* requestEditContacts({ payload: { contact } }) {
+  yield put(loading(''));
+  try {
+    const { id, name, lastname, email } = contact;
+    const userModified = {
+      name,
+      lastname,
+      email,
+    };
+    const token = localStorage.getItem('populus@token');
+    if (token === null || token === '') {
+      yield put(breakAction(''));
+      yield cancel();
+      history.push('/login');
+    }
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    yield call(api.put, `/users/content/contacts/${id}`, userModified, headers);
+    for (let i = 0; i < contact.phones.length; i += 1) {
+      const { number, description, modified, newPhone } = contact.phones[i];
+      const phoneModified = {
+        number,
+        description,
+        fk_contact_id: id,
+      };
+      if (modified && !newPhone) {
+        const { id: idPhone } = contact.phones[i];
+        yield call(
+          api.put,
+          `/users/content/contacts/content/phones/${idPhone}`,
+          phoneModified,
+          headers
+        );
+      } else if (newPhone) {
+        yield call(
+          api.post,
+          `/users/content/contacts/content/phones`,
+          phoneModified,
+          headers
+        );
+      }
+    }
+    for (let i = 0; i < contact.phonesExclud.length; i += 1) {
+      yield call(
+        api.delete,
+        `/users/content/contacts/content/phones/${contact.phonesExclud[i]}`
+      );
+    }
+    for (let i = 0; i < contact.addresses.length; i += 1) {
+      const {
+        id: idAddresses,
+        number,
+        address,
+        neighborhood,
+        city,
+        state,
+        country,
+        zipcode,
+        newAddress,
+        modified,
+      } = contact.addresses[i];
+      const addressesModified = {
+        number,
+        address,
+        neighborhood,
+        city,
+        state,
+        country,
+        zipcode,
+        fk_contact_id: id,
+      };
+      if (modified && !newAddress) {
+        yield call(
+          api.put,
+          `/users/content/contacts/content/addresses/${idAddresses}`,
+          addressesModified,
+          headers
+        );
+      } else if (newAddress) {
+        yield call(
+          api.post,
+          `/users/content/contacts/content/addresses`,
+          addressesModified,
+          headers
+        );
+      }
+    }
+    for (let i = 0; i < contact.addressesExclud.length; i += 1) {
+      yield call(
+        api.delete,
+        `/users/content/contacts/content/addresses/${contact.addressesExclud[i]}`,
+        headers
+      );
+    }
+    const {
+      data: { contacts },
+    } = yield call(api.get, `/user`, headers);
+    let user = localStorage.getItem('populus@user');
+    user = JSON.parse(user);
+    const dataNames = [];
+    const dataInfo = [
+      {
+        options: [
+          {
+            name: 'Nome',
+            type: 'alpha',
+            select: false,
+            length: 3,
+            align: 'flex-start',
+          },
+        ],
+      },
+    ];
+    contacts.forEach(contactParam => {
+      dataInfo.push({
+        ...contactParam,
+        select: false,
+      });
+      dataNames.push(`${contact.name} ${contact.lastname}`);
+    });
+    yield put(defineInformationUser(user.name, dataInfo, dataNames));
+    yield put(closedModal(false));
+    toast.success('Usuário alterado');
+    yield put(successAction(''));
+  } catch (error) {
+    yield put(closedModal(false));
+    const message = errorVerify(error);
+    toast.error('Usuário não cadastrado');
+    yield put(defineAddress('', '', '', '', '', false));
+    yield put(failureAction(message));
+  }
+}
 function* requestSelectContacts({ payload: { id, select, contacts } }) {
   let user = localStorage.getItem('populus@user');
   user = JSON.parse(user);
@@ -254,10 +389,173 @@ function* requestSelectContacts({ payload: { id, select, contacts } }) {
   yield put(defineInformationUser(user.name, dataInfo, dataNames));
   yield put(successAction(''));
 }
+function* requestDeleteDirect({ payload: { id } }) {
+  yield put(loading(''));
+  try {
+    const token = localStorage.getItem('populus@token');
+    if (token === null || token === '') {
+      yield put(breakAction(''));
+      yield cancel();
+      history.push('/login');
+    }
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    yield call(api.delete, `/users/content/contacts/${id}`, headers);
+    const {
+      data: { contacts },
+    } = yield call(api.get, `/user`, headers);
+    let user = localStorage.getItem('populus@user');
+    user = JSON.parse(user);
+    const dataNames = [];
+    const dataInfo = [
+      {
+        options: [
+          {
+            name: 'Nome',
+            type: 'alpha',
+            select: false,
+            length: 3,
+            align: 'flex-start',
+          },
+        ],
+      },
+    ];
+    contacts.forEach(contactParam => {
+      dataInfo.push({
+        ...contactParam,
+        select: false,
+      });
+      dataNames.push(`${contactParam.name} ${contactParam.lastname}`);
+    });
+    yield put(defineInformationUser(user.name, dataInfo, dataNames));
+    toast.success('Contato deletado');
+    yield put(successAction(''));
+  } catch (error) {
+    const message = errorVerify(error);
+    toast.error('Contato não deletado');
+    yield put(defineAddress('', '', '', '', '', false));
+    yield put(failureAction(message));
+  }
+}
+function* requestDeleteSelect({ payload: { contacts: contactsParam } }) {
+  yield put(loading(''));
+  try {
+    const token = localStorage.getItem('populus@token');
+    if (token === null || token === '') {
+      yield put(breakAction(''));
+      yield cancel();
+      history.push('/login');
+    }
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    for (let i = 0; i < contactsParam.length; i += 1) {
+      const { id } = contactsParam[i];
+      if (contactsParam[i].select) {
+        yield call(api.delete, `/users/content/contacts/${id}`, headers);
+      }
+    }
+    const {
+      data: { contacts },
+    } = yield call(api.get, `/user`, headers);
+    let user = localStorage.getItem('populus@user');
+    user = JSON.parse(user);
+    const dataNames = [];
+    const dataInfo = [
+      {
+        options: [
+          {
+            name: 'Nome',
+            type: 'alpha',
+            select: false,
+            length: 3,
+            align: 'flex-start',
+          },
+        ],
+      },
+    ];
+    contacts.forEach(contactParam => {
+      dataInfo.push({
+        ...contactParam,
+        select: false,
+      });
+      dataNames.push(`${contactParam.name} ${contactParam.lastname}`);
+    });
+    yield put(defineInformationUser(user.name, dataInfo, dataNames));
+    toast.success('Contatos deletados');
+    yield put(successAction(''));
+  } catch (error) {
+    const message = errorVerify(error);
+    toast.error('Contato não deletado');
+    yield put(defineAddress('', '', '', '', '', false));
+    yield put(failureAction(message));
+  }
+}
+function* requestContactsOrderName({ payload: { order } }) {
+  yield put(loading(''));
+  try {
+    const token = localStorage.getItem('populus@token');
+    if (token === null || token === '') {
+      yield put(breakAction(''));
+      yield cancel();
+      history.push('/login');
+    }
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const {
+      data: { contacts },
+    } = yield call(
+      api.get,
+      `/user?order=contacts&order=name&order=${order ? 'asc' : 'desc'}`,
+      headers
+    );
+    let user = localStorage.getItem('populus@user');
+    user = JSON.parse(user);
+    const dataNames = [];
+    const dataInfo = [
+      {
+        options: [
+          {
+            name: 'Nome',
+            type: 'alpha',
+            select: false,
+            length: 3,
+            align: 'flex-start',
+          },
+        ],
+      },
+    ];
+    contacts.forEach(contactParam => {
+      dataInfo.push({
+        ...contactParam,
+        select: false,
+      });
+      dataNames.push(`${contactParam.name} ${contactParam.lastname}`);
+    });
+    yield put(defineInformationUser(user.name, dataInfo, dataNames));
+    yield put(successAction(''));
+  } catch (error) {
+    const message = errorVerify(error);
+    yield put(defineAddress('', '', '', '', '', false));
+    yield put(failureAction(message));
+  }
+}
 export default all([
   takeLatest('@contacts/REQUEST_TO_PAGE_ADD_CONTACT', requestToPageAddContact),
   takeLatest('@contacts/REQUEST_CONTACTS', requestContacts),
   takeLatest('@contacts/REQUEST_FIND_ZIPCODE', requestFindZipCode),
   takeLatest('@contacts/REQUEST_SAVE_CONTACT', requestSaveContact),
   takeLatest('@contacts/REQUEST_SELECT_CONTACTS', requestSelectContacts),
+  takeLatest('@contacts/REQUEST_EDIT_CONTACTS', requestEditContacts),
+  takeLatest('@contacts/REQUEST_DELETE_DIRECT', requestDeleteDirect),
+  takeLatest('@contacts/REQUEST_DELETE_SELECTS', requestDeleteSelect),
+  takeLatest('@contacts/REQUEST_CONTACTS_ORDER_NAME', requestContactsOrderName),
 ]);
